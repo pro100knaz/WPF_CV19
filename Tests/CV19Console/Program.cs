@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
 using System.Net;
 using System.Linq;
@@ -20,20 +21,26 @@ var client = new HttpClient();
 //    Console.WriteLine(dataLine);
 //}
 
-var dates = GetDates();
+
 //foreach (var data in dates)
 //{
 //            Console.WriteLine(data.ToString());
 //}
 
-Console.WriteLine(string.Join("\r\n", dates));
+//var dates = GetDates();
+//Console.WriteLine(string.Join("\r\n", dates));
 
+var russia = GetData().First(v => v.Country.Equals("Russia", StringComparison.OrdinalIgnoreCase));
 
+Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia.Counts, (date,count) => $"{date} - {count}")));
 
+var moldova = GetData().First(v => v.Country.Equals("Moldova", StringComparison.OrdinalIgnoreCase));
+
+Console.WriteLine(string.Join("\r\n", GetDates().Zip(moldova.Counts, (date, count) => $"{date:dd:MM} - {count}")));
 
 ///
 ///Поток данных
-/// 
+///     
 static async Task<Stream> GetDataStream()
 {
     var client = new HttpClient();
@@ -57,7 +64,8 @@ static  IEnumerable<string> GetDataLines()
         var line = data_reader.ReadLine();
 
         if (string.IsNullOrWhiteSpace(line)) continue;
-        yield return line;
+
+        yield return line.Replace("Korea," , "Korea -").Replace( "Bonaire," , "Bonaire").Replace("Helena,","Helena");
 
     }
 }
@@ -69,6 +77,21 @@ static DateTime[] GetDates() => GetDataLines()
     .Select(s=> DateTime.Parse(s, CultureInfo.InvariantCulture))
     .ToArray();
 
+
+static IEnumerable<(string Country, string Province, int[]Counts)> GetData()
+{
+    var lines = GetDataLines()
+        .Skip(1)
+        .Select(line => line.Split(','));
+
+    foreach (var row in lines)
+    {
+        var province = row[0].Trim();
+        var country_name = row[1].Trim(' ', '"');
+        var counts = row.Skip(4).Select(int.Parse).ToArray();
+        yield return (country_name, province, counts);
+    }
+}
 
 
 Console.Write("jesfsfef");
