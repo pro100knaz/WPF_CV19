@@ -3,12 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using CV19Main.Infrastructure.Commands;
 using CV19Main.ViewModels.Base;
 
 namespace CV19Main.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+
+
+        #region Команды
+
+        #region CloseApplicationCommand
+
+
+        public ICommand CloseApplicationCommand { get; }
+
+            private bool CanCloseApplicationCommandExecute(object p) => true;
+            private void OnCloseApplicationCommandExecuted(object p)
+            {
+                Application.Current.Shutdown();
+            }
+
+
+        #endregion
+        #endregion
+
+
+        public MainWindowViewModel()
+        {
+
+            #region Commands
+
+            CloseApplicationCommand =
+                new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+
+            #endregion
+        }
+
+
         #region Title Property
 
         
@@ -45,11 +80,6 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        private string _description;
-        public string Description
-        {
-            get => _description;
-            set => SetField(ref _description, value);
-        }
+       
     }
 }
