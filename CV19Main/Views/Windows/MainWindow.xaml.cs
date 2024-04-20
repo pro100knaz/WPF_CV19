@@ -8,6 +8,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CV19Main.ViewModels;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+
+using CV19Main.ViewModels;
 
 namespace CV19Main
 {
@@ -20,5 +26,7 @@ namespace CV19Main
         {
             InitializeComponent();
         }
+
+       
     }
 }

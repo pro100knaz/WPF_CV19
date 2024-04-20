@@ -7,6 +7,9 @@
         xmlns:cmd="clr-namespace:CV19Main.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Main.ViewModels"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
+
         mc:Ignorable="d"
         Title="{Binding Path= Title}" 
         Height="450" Width="800">
@@ -91,8 +94,25 @@
 
                 </Grid>
                 </TabItem>
-                    <TabItem Header="Вкладка 2">
+                    <TabItem Header="ГРАФИК">
+                    <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
 
+                        <Button x:Name="addAxes" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Content="AddAxes" CommandParameter="{Binding ElementName=Plot}">
+                        <Button.Command>
+                            <cmd:AddAxesCommand></cmd:AddAxesCommand>
+                        </Button.Command>
+                        </Button>
+                        <Button x:Name="addLines" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="AddLines" CommandParameter="{Binding ElementName=Plot}">
+                        <Button.Command>
+                            <cmd:AddAxesCommand></cmd:AddAxesCommand>
+                        </Button.Command>
+                        </Button>
+                    </StackPanel>
+                            <oxy:PlotView x:Name="Plot" DockPanel.Dock="Bottom"/>
+                    </DockPanel>
+
+                    <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
             </TabItem>
         </TabControl>
     </DockPanel>
