@@ -98,14 +98,14 @@
                     <DockPanel LastChildFill="True">
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
 
-                        <Button x:Name="addAxes" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Content="AddAxes" CommandParameter="{Binding ElementName=Plot}">
+                        <Button x:Name="addAxes" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch"  Content="AddAxes" CommandParameter="{Binding ElementName=Plot}">
                         <Button.Command>
                             <cmd:AddAxesCommand></cmd:AddAxesCommand>
                         </Button.Command>
                         </Button>
-                        <Button x:Name="addLines" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="AddLines" CommandParameter="{Binding ElementName=Plot}">
+                        <Button x:Name="addLines" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch" Content="AddLines" CommandParameter="{Binding ElementName=Plot}">
                         <Button.Command>
-                            <cmd:AddAxesCommand></cmd:AddAxesCommand>
+                            <cmd:AddLinesCommand></cmd:AddLinesCommand>
                         </Button.Command>
                         </Button>
                     </StackPanel>
