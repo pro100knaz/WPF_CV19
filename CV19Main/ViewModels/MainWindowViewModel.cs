@@ -9,23 +9,47 @@ namespace CV19Main.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
-        private string _title;
+        #region Title Property
 
-        /// <summary> Заголовок окна </summary>
-        public string Title {
-            get
-            {
-                return _title;
+        
+            /// /// <summary> Заголовок окна </summary>/// <summary> Заголовок окна </summary>
+            private string _title = "CV19 TIME TO ACTION";
+
+            /// <summary> Заголовок окна </summary>
+            public string Title {
+                get
+                {
+                    return _title;
+                }
+                set
+                {
+                    
+                    SetField(ref _title, value);
+                }
             }
-            set
+
+        #endregion
+
+        #region Status Property
+
+            private string _status = "Ready";
+
+        /// <summary>
+        /// Поле описывающее состояние программмы
+        /// </summary>
+            public string Status
             {
-                //if (Equals(value, _title)) return;
-                //_title = value;
-                
-                //OnPropertyChanged();
-                
-                SetField(ref _title, value);
+                get => _status;
+                set => SetField(ref _status, value);
             }
+
+        #endregion
+
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set => SetField(ref _description, value);
         }
     }
 }

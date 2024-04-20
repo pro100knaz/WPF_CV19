@@ -23,7 +23,10 @@
 
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBlock Text=" 2132131"/>
+                <TextBlock Text="{Binding Title}"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding Status }" ToolTip="slmsefkmlkesfemlkesf"/>
             </StatusBarItem>
             <StatusBarItem>
                 <ProgressBar Width="120" Height="14" Value="23"></ProgressBar>
