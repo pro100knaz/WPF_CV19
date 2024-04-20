@@ -4,17 +4,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CV19Main"
+        xmlns:cmd="clr-namespace:CV19Main.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Main.ViewModels"
         mc:Ignorable="d"
         Title="{Binding Path= Title}" 
         Height="450" Width="800">
-    <Window.DataContext>
+    <Window.InputBindings>
+       <KeyBinding Modifiers="Control" Key="Q">
+           <KeyBinding.Command>
+               <cmd:CloseApplicationCommand></cmd:CloseApplicationCommand>
+           </KeyBinding.Command>
+       </KeyBinding>
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
+
+            <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>
+                <!--<MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>-->
+                <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}">
+
+                    <!--<MenuItem.Command>
+                        <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>-->
+
+
+                <!--ORRRR добавляем элемент в ресурсы приложения и используем его отттудаааааа-->
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="пОМОЩЬ">
                 <MenuItem Header=" О программе"/>
@@ -45,6 +67,20 @@
                         <ColumnDefinition Width="60*"/>
                         <ColumnDefinition Width="639*"/>
                     </Grid.ColumnDefinitions>
+
+                    <Ellipse Grid.Column="2" Fill="Aqua">
+                        <Ellipse.InputBindings>
+
+                            <!--Команды для обьектов котроые их не поддерживают только таким образом можно дделать !!!!!!!!!-->
+                            <MouseBinding MouseAction="LeftClick">
+                                <MouseBinding.Command>
+                                    <cmd:CloseApplicationCommand/>
+                                </MouseBinding.Command>
+                            </MouseBinding>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
+                    <Ellipse Grid.Column="2" Margin="309,0,28,0" Fill="Brown"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Вкладка 2">
