@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using CV19Main.Infrastructure.Commands;
 using CV19Main.Models;
@@ -30,6 +32,22 @@ namespace CV19Main.ViewModels
 
         #endregion
 
+        #region SelectedPageIndexProperty
+
+            private int _selectedPageIndex;
+
+            public int SelectedPageIndex
+            {
+                get => _selectedPageIndex;
+                set
+                {
+                    SetField(ref _selectedPageIndex, value);
+                }
+            }
+
+        #endregion
+
+
         #region Commands 
 
         #region CloseApplicationCommand   
@@ -46,18 +64,27 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        #region ShowAxes
+        #region PageIndexChange
+
+        public ICommand PageIndexChangeCommand { get; }
+
+        private bool CanPageIndexChangeCommandExecute(object p) => SelectedPageIndex >= 0;
+
+        private void OnPageIndexChangeCommandExecuted(object p)
+        {
+            if (p is null) return;
+            SelectedPageIndex += Convert.ToInt32(p);
+
+        }
+
+        #endregion 
+
+        #region NextTabItemCommand
 
 
         #endregion
 
         public PlotModel model;
-
-        #endregion
-
-        #region Points and oxes
-
-
 
         #endregion
 
@@ -69,18 +96,11 @@ namespace CV19Main.ViewModels
             //CloseApplicationCommand =
             //    new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
+            PageIndexChangeCommand =
+                new LambdaCommand(OnPageIndexChangeCommandExecuted, CanPageIndexChangeCommandExecute);
+
             #endregion
 
-            var data_points = new List<DataPoint>((int) (360/0.1));
-
-            for (var x = 0d; x <= 360; x += 0.1)
-            {
-                const double to_rad = Math.PI / 180;
-                var y = Math.Sin(x * to_rad);
-                data_points.Add(new DataPoint(x,y));
-            }
-
-            TestDataPoints = data_points;
         }
 
 

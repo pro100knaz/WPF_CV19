@@ -21,15 +21,15 @@ namespace CV19Main.Infrastructure.Commands
             model.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
-                StartPosition = 0, EndPosition = 2,
+               
                 
-                //Maximum =1,
+                Maximum =1,
                 Title = "Y",
             });
             model.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-                StartPosition = 0, EndPosition = 1,
+            
 
                 Title = "X",
             });

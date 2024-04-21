@@ -45,6 +45,16 @@
             <MenuItem Header="пОМОЩЬ">
                 <MenuItem Header=" О программе"/>
             </MenuItem>
+            <MenuItem Command="{Binding PageIndexChangeCommand}" CommandParameter="-1">
+                <MenuItem.Header>
+                <fa:ImageAwesome Icon="Regular_ArrowAltCircleLeft" Height="20"></fa:ImageAwesome>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Command="{Binding PageIndexChangeCommand}" CommandParameter="+1">
+                <MenuItem.Header>
+                <fa:ImageAwesome Icon="Regular_ArrowAltCircleRight" Height="20"></fa:ImageAwesome>
+                </MenuItem.Header>
+            </MenuItem>
         </Menu>
 
         <StatusBar DockPanel.Dock="Bottom">
@@ -58,7 +68,7 @@
                 <ProgressBar Width="120" Height="14" Value="23"></ProgressBar>
             </StatusBarItem>
         </StatusBar>
-        <TabControl>
+        <TabControl SelectedIndex="{Binding SelectedPageIndex}">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -114,6 +124,11 @@
 
                     <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
             </TabItem>
+            <TabItem Header="Вкладка 1"/>
+            <TabItem Header="Вкладка 2"/>
+            <TabItem Header="Вкладка 3"/>
+            <TabItem Header="Вкладка 4"/>
+            <TabItem Header="Вкладка 5"/>
         </TabControl>
     </DockPanel>
 </Window>
