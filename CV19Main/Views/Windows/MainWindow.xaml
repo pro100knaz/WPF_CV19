@@ -124,7 +124,25 @@
 
                     <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
             </TabItem>
-            <TabItem Header="Вкладка 1"/>
+            <TabItem Header="Students">
+              
+                <Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="250"/>
+        
+        <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+<GroupBox Header="Grupps">
+    <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"></ListBox>
+</GroupBox>
+
+                    <GroupBox Header="Students" Grid.Column="1">
+                       <DataGrid>
+
+                       </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
             <TabItem Header="Вкладка 2"/>
             <TabItem Header="Вкладка 3"/>
             <TabItem Header="Вкладка 4"/>
