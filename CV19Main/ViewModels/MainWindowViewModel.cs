@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using CV19Main.Infrastructure.Commands;
 using CV19Main.Models;
+using CV19Main.Models.Decanat;
 using CV19Main.ViewModels.Base;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -18,6 +20,9 @@ namespace CV19Main.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+
+        public ObservableCollection<Group> Groups { get; set; }
+
         #region TestDataPoints
 
         private IEnumerable<DataPoint> _testDataPoints;
@@ -100,6 +105,24 @@ namespace CV19Main.ViewModels
                 new LambdaCommand(OnPageIndexChangeCommandExecuted, CanPageIndexChangeCommandExecute);
 
             #endregion
+
+            var student_index = 1;
+            var students = Enumerable.Range(1, 10).Select(i => new Student()
+            {
+                Name = $"Name {student_index}",
+                SureName = $"Surname {student_index ++}",
+                Birthday = DateTime.Now,
+                Rating = 0
+
+            });
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+            {
+                Name = $"Группа {i}",
+                Students = new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
 
         }
 
