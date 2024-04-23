@@ -19,7 +19,7 @@ namespace CV19Main.Models.Decanat
 
     internal class Group
     {
-        public string Name { get;set; }
+        public string Name { get; set; }
         public ICollection<Student> Students { get; set; }
     }
 }

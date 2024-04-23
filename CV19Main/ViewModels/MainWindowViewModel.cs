@@ -18,14 +18,24 @@ using OxyPlot.Wpf;
 
 namespace CV19Main.ViewModels
 {
+
     internal class MainWindowViewModel : ViewModel
     {
 
         public ObservableCollection<Group> Groups { get; set; }
 
+        private Group _SelectedGroup;
+
+        public Group SelectedGroup
+        {
+            get => _SelectedGroup;
+            set => SetField(ref _SelectedGroup, value);
+        }
+
         #region TestDataPoints
 
         private IEnumerable<DataPoint> _testDataPoints;
+
         /// <summary>
         /// Тестовый набор данных для визуализации графиков
         /// </summary>
@@ -39,33 +49,29 @@ namespace CV19Main.ViewModels
 
         #region SelectedPageIndexProperty
 
-            private int _selectedPageIndex;
+        private int _selectedPageIndex;
 
-            public int SelectedPageIndex
-            {
-                get => _selectedPageIndex;
-                set
-                {
-                    SetField(ref _selectedPageIndex, value);
-                }
-            }
+        public int SelectedPageIndex
+        {
+            get => _selectedPageIndex;
+            set { SetField(ref _selectedPageIndex, value); }
+        }
 
         #endregion
 
 
-        #region Commands 
+        #region Commands
 
-        #region CloseApplicationCommand   
-
+        #region CloseApplicationCommand
 
         public ICommand CloseApplicationCommand { get; }
 
-            private bool CanCloseApplicationCommandExecute(object p) => true;
-            private void OnCloseApplicationCommandExecuted(object p)
-            {
-                Application.Current.Shutdown();
-            }
+        private bool CanCloseApplicationCommandExecute(object p) => true;
 
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
 
         #endregion
 
@@ -79,13 +85,11 @@ namespace CV19Main.ViewModels
         {
             if (p is null) return;
             SelectedPageIndex += Convert.ToInt32(p);
-
         }
 
-        #endregion 
+        #endregion
 
         #region NextTabItemCommand
-
 
         #endregion
 
@@ -95,7 +99,6 @@ namespace CV19Main.ViewModels
 
         public MainWindowViewModel()
         {
-
             #region Commands
 
             //CloseApplicationCommand =
@@ -110,10 +113,9 @@ namespace CV19Main.ViewModels
             var students = Enumerable.Range(1, 10).Select(i => new Student()
             {
                 Name = $"Name {student_index}",
-                SureName = $"Surname {student_index ++}",
+                SureName = $"Surname {student_index++}",
                 Birthday = DateTime.Now,
                 Rating = 0
-
             });
 
             var groups = Enumerable.Range(1, 20).Select(i => new Group
@@ -123,46 +125,36 @@ namespace CV19Main.ViewModels
             });
 
             Groups = new ObservableCollection<Group>(groups);
-
         }
 
 
         #region Title Property
 
-        
-            /// /// <summary> Заголовок окна </summary>/// <summary> Заголовок окна </summary>
-            private string _title = "CV19 TIME TO ACTION";
+        /// /// <summary> Заголовок окна </summary>/// <summary> Заголовок окна </summary>
+        private string _title = "CV19 TIME TO ACTION";
 
-            /// <summary> Заголовок окна </summary>
-            public string Title {
-                get
-                {
-                    return _title;
-                }
-                set
-                {
-                    
-                    SetField(ref _title, value);
-                }
-            }
+        /// <summary> Заголовок окна </summary>
+        public string Title
+        {
+            get { return _title; }
+            set { SetField(ref _title, value); }
+        }
 
         #endregion
 
         #region Status Property
 
-            private string _status = "Ready";
+        private string _status = "Ready";
 
-            /// <summary>
+        /// <summary>
         /// Поле описывающее состояние программмы
         /// </summary>
-            public string Status
-            {
-                get => _status;
-                set => SetField(ref _status, value);
-            }
+        public string Status
+        {
+            get => _status;
+            set => SetField(ref _status, value);
+        }
 
         #endregion
-
-       
     }
 }
