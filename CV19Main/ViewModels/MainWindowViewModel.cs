@@ -84,8 +84,53 @@ namespace CV19Main.ViewModels
         private void OnPageIndexChangeCommandExecuted(object p)
         {
             if (p is null) return;
+
             SelectedPageIndex += Convert.ToInt32(p);
         }
+
+
+
+        #region CreateNewGroupCommand
+
+        public ICommand CreateNewGroupCommand { get; }
+
+        private bool CanCreateNewGruopCommandExecute(object p) => true;
+
+        public void OnCreateNewGruopCommandExecuted(object p)
+        {
+            var group_max_index = Groups.Count + 1;
+            var new_group = new Group()
+            {
+                Name = $"GROUP {group_max_index}",
+                Students = new ObservableCollection<Student>()
+            };
+            Groups.Add(new_group);
+        }
+
+        #endregion
+
+
+        #region  DeleteGroupCpmmand Command
+
+        public ICommand DeleteGroupCpmmand { get; }
+
+        private bool CanDeleteGroupCpmmandExecute (object p) => p is Group group && Groups.Contains(group);
+
+        public void OnDeleteGroupCpmmandExecuted(object p)
+        {
+            if (!(p is Group group)) return;
+            
+            int group_index = Groups.IndexOf(group);
+            Groups.Remove(group);
+
+            if (group_index < Groups.Count)
+            {
+                SelectedGroup = Groups[group_index];
+            }
+            
+        }
+
+        #endregion
 
         #endregion
 
@@ -103,6 +148,10 @@ namespace CV19Main.ViewModels
 
             //CloseApplicationCommand =
             //    new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+
+            CreateNewGroupCommand = new LambdaCommand(OnCreateNewGruopCommandExecuted, CanCreateNewGruopCommandExecute);
+
+            DeleteGroupCpmmand = new LambdaCommand(OnDeleteGroupCpmmandExecuted, CanDeleteGroupCpmmandExecute);
 
             PageIndexChangeCommand =
                 new LambdaCommand(OnPageIndexChangeCommandExecuted, CanPageIndexChangeCommandExecute);
