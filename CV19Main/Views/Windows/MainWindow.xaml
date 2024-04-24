@@ -71,61 +71,8 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Icon="Regular_File" Height="17" Foreground="Red"/>
-                        <TextBlock Text="Вкладка 1" Padding="4,2"></TextBlock>
-
-                    </StackPanel>
-                </TabItem.Header>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="53*"/>
-                        <RowDefinition Height="65*"/>
-                        <RowDefinition Height="270*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="95*"/>
-                        <ColumnDefinition Width="60*"/>
-                        <ColumnDefinition Width="639*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Ellipse Grid.Column="2" Fill="Aqua">
-                        <Ellipse.InputBindings>
-
-                            <!--Команды для обьектов котроые их не поддерживают только таким образом можно дделать !!!!!!!!!-->
-                            <MouseBinding MouseAction="LeftClick">
-                                <MouseBinding.Command>
-                                    <cmd:CloseApplicationCommand/>
-                                </MouseBinding.Command>
-                            </MouseBinding>
-                        </Ellipse.InputBindings>
-                    </Ellipse>
-                    <Ellipse Grid.Column="2" Margin="309,0,28,0" Fill="Brown"/>
-
-                </Grid>
-            </TabItem>
-            <TabItem Header="ГРАФИК">
-                <DockPanel LastChildFill="True">
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-
-                        <Button x:Name="addAxes" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch"  Content="AddAxes" CommandParameter="{Binding ElementName=Plot}">
-                            <Button.Command>
-                                <cmd:AddAxesCommand></cmd:AddAxesCommand>
-                            </Button.Command>
-                        </Button>
-                        <Button x:Name="addLines" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch" Content="AddLines" CommandParameter="{Binding ElementName=Plot}">
-                            <Button.Command>
-                                <cmd:AddLinesCommand></cmd:AddLinesCommand>
-                            </Button.Command>
-                        </Button>
-                    </StackPanel>
-                    <oxy:PlotView x:Name="Plot" DockPanel.Dock="Bottom"/>
-                </DockPanel>
-
-                <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
-            </TabItem>
+            
+          
             <TabItem Header="Students">
 
                 <Grid>
@@ -135,10 +82,26 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <GroupBox Header="Grupps">
-                        <ListBox ItemsSource="{Binding Groups}" SelectedIndex="0" 
-                             DisplayMemberPath="Name"
-                             
-                             SelectedItem="{Binding SelectedGroup}"/>
+                    <DockPanel>
+                        <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin=" 3,5">
+                            <Button Content="Добавить" Margin="3,0" Command="{Binding CreateNewGroupCommand}"/>
+                            <Button  Content="Удалить" Command="{Binding DeleteGroupCpmmand}" CommandParameter="{Binding SelectedGroup}"/>
+                        </UniformGrid>
+
+                        <ListBox 
+                            ItemsSource="{Binding Groups}" SelectedIndex="0" 
+                             SelectedItem="{Binding SelectedGroup}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type decanat:Group}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Students.Count, StringFormat=[Студентов: {0}]}" Margin="3,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+
+                            </ListBox.ItemTemplate>
+                            </ListBox>
+</DockPanel>
                     </GroupBox>
                     <GroupBox Header="{Binding SelectedGroup.Name, FallbackValue= 'студенты' , TargetNullValue='Группа не выьрана'}" Grid.Column="1">
                         <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
@@ -174,6 +137,64 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ГРАФИК">
+
+
+                <DockPanel LastChildFill="True">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+
+                        <Button x:Name="addAxes" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch"  Content="AddAxes" CommandParameter="{Binding ElementName=Plot}">
+                            <Button.Command>
+                                <cmd:AddAxesCommand></cmd:AddAxesCommand>
+                            </Button.Command>
+                        </Button>
+                        <Button x:Name="addLines" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch" Content="AddLines" CommandParameter="{Binding ElementName=Plot}">
+                            <Button.Command>
+                                <cmd:AddLinesCommand></cmd:AddLinesCommand>
+                            </Button.Command>
+                        </Button>
+                    </StackPanel>
+                    <oxy:PlotView x:Name="Plot" DockPanel.Dock="Bottom"/>
+                </DockPanel>
+
+                <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Regular_File" Height="17" Foreground="Red"/>
+                        <TextBlock Text="Вкладка 1" Padding="4,2"></TextBlock>
+
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="53*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="270*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="95*"/>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="639*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Ellipse Grid.Column="2" Fill="Aqua">
+                        <Ellipse.InputBindings>
+
+                            <!--Команды для обьектов котроые их не поддерживают только таким образом можно дделать !!!!!!!!!-->
+                            <MouseBinding MouseAction="LeftClick">
+                                <MouseBinding.Command>
+                                    <cmd:CloseApplicationCommand/>
+                                </MouseBinding.Command>
+                            </MouseBinding>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
+                    <Ellipse Grid.Column="2" Margin="309,0,28,0" Fill="Brown"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Вкладка 2"/>
