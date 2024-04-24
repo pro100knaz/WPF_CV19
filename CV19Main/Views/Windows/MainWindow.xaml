@@ -16,18 +16,18 @@
         Title="{Binding Path= Title}" 
         Height="450" Width="800">
     <Window.InputBindings>
-       <KeyBinding Modifiers="Control" Key="Q">
-           <KeyBinding.Command>
-               <cmd:CloseApplicationCommand></cmd:CloseApplicationCommand>
-           </KeyBinding.Command>
-       </KeyBinding>
+        <KeyBinding Modifiers="Control" Key="Q">
+            <KeyBinding.Command>
+                <cmd:CloseApplicationCommand></cmd:CloseApplicationCommand>
+            </KeyBinding.Command>
+        </KeyBinding>
     </Window.InputBindings>
 
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
     </Window.Resources>
 
-            <Window.DataContext>
+    <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel>
@@ -41,7 +41,7 @@
                     </MenuItem.Command>-->
 
 
-                <!--ORRRR добавляем элемент в ресурсы приложения и используем его отттудаааааа-->
+                    <!--ORRRR добавляем элемент в ресурсы приложения и используем его отттудаааааа-->
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="пОМОЩЬ">
@@ -49,12 +49,12 @@
             </MenuItem>
             <MenuItem Command="{Binding PageIndexChangeCommand}" CommandParameter="-1">
                 <MenuItem.Header>
-                <fa:ImageAwesome Icon="Regular_ArrowAltCircleLeft" Height="20"></fa:ImageAwesome>
+                    <fa:ImageAwesome Icon="Regular_ArrowAltCircleLeft" Height="20"></fa:ImageAwesome>
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem Command="{Binding PageIndexChangeCommand}" CommandParameter="+1">
                 <MenuItem.Header>
-                <fa:ImageAwesome Icon="Regular_ArrowAltCircleRight" Height="20"></fa:ImageAwesome>
+                    <fa:ImageAwesome Icon="Regular_ArrowAltCircleRight" Height="20"></fa:ImageAwesome>
                 </MenuItem.Header>
             </MenuItem>
         </Menu>
@@ -75,11 +75,11 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Regular_File" Height="17" Foreground="Red"/>
-                            <TextBlock Text="Вкладка 1" Padding="4,2"></TextBlock>
+                        <TextBlock Text="Вкладка 1" Padding="4,2"></TextBlock>
 
                     </StackPanel>
                 </TabItem.Header>
-                    <Grid>
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="53*"/>
                         <RowDefinition Height="65*"/>
@@ -105,65 +105,74 @@
                     <Ellipse Grid.Column="2" Margin="309,0,28,0" Fill="Brown"/>
 
                 </Grid>
-                </TabItem>
-                    <TabItem Header="ГРАФИК">
-                    <DockPanel LastChildFill="True">
+            </TabItem>
+            <TabItem Header="ГРАФИК">
+                <DockPanel LastChildFill="True">
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
 
                         <Button x:Name="addAxes" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch"  Content="AddAxes" CommandParameter="{Binding ElementName=Plot}">
-                        <Button.Command>
-                            <cmd:AddAxesCommand></cmd:AddAxesCommand>
-                        </Button.Command>
+                            <Button.Command>
+                                <cmd:AddAxesCommand></cmd:AddAxesCommand>
+                            </Button.Command>
                         </Button>
                         <Button x:Name="addLines" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch" Content="AddLines" CommandParameter="{Binding ElementName=Plot}">
-                        <Button.Command>
-                            <cmd:AddLinesCommand></cmd:AddLinesCommand>
-                        </Button.Command>
+                            <Button.Command>
+                                <cmd:AddLinesCommand></cmd:AddLinesCommand>
+                            </Button.Command>
                         </Button>
                     </StackPanel>
-                            <oxy:PlotView x:Name="Plot" DockPanel.Dock="Bottom"/>
-                    </DockPanel>
+                    <oxy:PlotView x:Name="Plot" DockPanel.Dock="Bottom"/>
+                </DockPanel>
 
-                    <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
+                <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
             </TabItem>
             <TabItem Header="Students">
-              
+
                 <Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="250"/>
-        
-        <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-                <GroupBox Header="Grupps">
-                    <ListBox ItemsSource="{Binding Groups}" SelectedIndex="0" 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Grupps">
+                        <ListBox ItemsSource="{Binding Groups}" SelectedIndex="0" 
                              DisplayMemberPath="Name"
                              
                              SelectedItem="{Binding SelectedGroup}"/>
-                </GroupBox>
+                    </GroupBox>
                     <GroupBox Header="{Binding SelectedGroup.Name, FallbackValue= 'студенты' , TargetNullValue='Группа не выьрана'}" Grid.Column="1">
-                       <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
+                        <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
                                  VerticalGridLinesBrush="Bisque"
                                  GridLinesVisibility="Vertical"
                                  AlternatingRowBackground="BurlyWood"
-                                 
-                                 IsReadOnly="True">
-                           <DataGrid.Columns>
-                                <DataGridTextColumn Header="Фамилия" Binding="{Binding SureName}"/>
-                                <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}"/>
+                                 CanUserAddRows="False"
+                                 >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding SureName}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Birthday , StringFormat=dd.MM.yyyy}"/>
                                 <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Birthday}"/>
                                 <DataGridTemplateColumn Header="Дата Рождения Template">
-                                    <DataGridTemplateColumn.CellTemplate>
+                                    <!--<DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate DataType="{x:Type decanat:Student}">
                                             <DatePicker SelectedDate="{Binding Birthday}"/>
                                         </DataTemplate>
-
+                                    </DataGridTemplateColumn.CellTemplate>-->
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type decanat:Student}">
+                                            <TextBlock Text="{Binding Birthday, StringFormat='dd.MM.yyyy'}"></TextBlock>
+                                        </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate DataType="{x:Type decanat:Student}">
+                                            <DatePicker SelectedDate="{Binding Birthday}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                 <DataGridTextColumn Header="Заметки" Binding="{Binding Description}" Width="*"/>
-                           </DataGrid.Columns>
-                       </DataGrid>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </GroupBox>
                 </Grid>
             </TabItem>
