@@ -151,7 +151,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="ГРАФИК">
+            <TabItem Header="ГРАФИК" Visibility="Collapsed">
 
 
                 <DockPanel LastChildFill="True">
@@ -174,7 +174,7 @@
                 <!--<series:LineSeries ItemsSource="{Binding TestDataPoints}" DataFieldX="x" DataFieldY="y"/>-->
             </TabItem>
 
-            <TabItem>
+            <TabItem Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Regular_File" Height="17" Foreground="Red"/>
@@ -210,7 +210,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Вкладка 2">
+            <TabItem Header="Вкладка 2" Visibility="Collapsed">
                 <Button Width=" 20" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
 
                     <Button.Background>
@@ -259,9 +259,6 @@
                     </Button.Triggers>
                     </Button>
             </TabItem>
-                    <TabItem Header="Вкладка 3"/>
-            <TabItem Header="Вкладка 4"/>
-            <TabItem Header="Вкладка 5"/>
         </TabControl>
     </DockPanel>
 </Window>
