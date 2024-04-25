@@ -71,8 +71,8 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
-            
-          
+
+
             <TabItem Header="Students">
 
                 <Grid>
@@ -82,26 +82,38 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <GroupBox Header="Grupps">
-                    <DockPanel>
-                        <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin=" 3,5">
-                            <Button Content="Добавить" Margin="3,0" Command="{Binding CreateNewGroupCommand}"/>
-                            <Button  Content="Удалить" Command="{Binding DeleteGroupCpmmand}" CommandParameter="{Binding SelectedGroup}"/>
-                        </UniformGrid>
-
-                        <ListBox 
+                        <DockPanel>
+                            <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin=" 3,5">
+                                <UniformGrid.Resources>
+                                    <Style x:Key="BtnStyle" TargetType="Button">
+                                        <Setter Property="Margin" Value="3, 0"/>
+                                        <Setter Property="Padding" Value="3, 5"/>
+                                        <Setter Property="Background" Value="White"/>
+                                    </Style>
+                                </UniformGrid.Resources>
+                                        <Button Content="Добавить" Style="{StaticResource BtnStyle}" Command="{Binding CreateNewGroupCommand}"/>
+                                        <Button Content="Удалить" Style="{StaticResource BtnStyle}" Command="{Binding DeleteGroupCpmmand}" 
+                                                CommandParameter="{Binding SelectedGroup}"/>
+                            </UniformGrid>
+                            <ListBox
                             ItemsSource="{Binding Groups}" SelectedIndex="0" 
                              SelectedItem="{Binding SelectedGroup}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type decanat:Group}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Students.Count, StringFormat=[Студентов: {0}]}" Margin="3,0,0,0"/>
-                                    </StackPanel>
-                                </DataTemplate>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type decanat:Group}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" Name="TextView"/>
+                                            <TextBlock Text="{Binding Students.Count, StringFormat=[Студентов: {0}]}" Margin="3,0,0,0"/>
+                                        </StackPanel>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Students.Count}" Value="0">
+                                                <Setter TargetName="TextView" Property="Foreground" Value="Red"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
 
-                            </ListBox.ItemTemplate>
+                                </ListBox.ItemTemplate>
                             </ListBox>
-</DockPanel>
+                        </DockPanel>
                     </GroupBox>
                     <GroupBox Header="{Binding SelectedGroup.Name, FallbackValue= 'студенты' , TargetNullValue='Группа не выьрана'}" Grid.Column="1">
                         <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
@@ -131,8 +143,8 @@
                                             <DatePicker SelectedDate="{Binding Birthday}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellEditingTemplate>
-                                    </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                                 <DataGridTextColumn Header="Заметки" Binding="{Binding Description}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -194,11 +206,60 @@
                         </Ellipse.InputBindings>
                     </Ellipse>
                     <Ellipse Grid.Column="2" Margin="309,0,28,0" Fill="Brown"/>
+                    <Button Style="{x:Null}" Grid.Column="2" Content="Button" HorizontalAlignment="Left" Margin="201,103,0,0" Grid.Row="2" VerticalAlignment="Top" Height="83" Width="154"/>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Вкладка 2"/>
-            <TabItem Header="Вкладка 3"/>
+            <TabItem Header="Вкладка 2">
+                <Button Width=" 20" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+
+                    <Button.Background>
+                        <SolidColorBrush Color="White" x:Name="ButtonBrush"/>
+                    </Button.Background>
+                    <Button.RenderTransform>
+                        <RotateTransform x:Name="ButtonRotate"/>    
+                    </Button.RenderTransform>
+                        <Button.Triggers >
+                        
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ButtonRotate"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         From="0" To="360"
+                                                         Duration="0:0:1"
+                                                         AutoReverse="True">
+
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                                <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="ButtonBrush"
+                                                        Storyboard.TargetProperty="Color"
+                                                        Duration="0:0:0.1"
+                                                        To="Red"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="ButtonBrush"
+                                                        Storyboard.TargetProperty="Color"
+                                                        Duration="0:0:3"
+                                                        To="White"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                        </EventTrigger>
+
+                    </Button.Triggers>
+                    </Button>
+            </TabItem>
+                    <TabItem Header="Вкладка 3"/>
             <TabItem Header="Вкладка 4"/>
             <TabItem Header="Вкладка 5"/>
         </TabControl>

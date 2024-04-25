@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="FontAwesome5" Version="2.1.11" />
-    <PackageReference Include="FontAwesome5.WPF" Version="1.0.5" />
   </ItemGroup>
 
 </Project>
