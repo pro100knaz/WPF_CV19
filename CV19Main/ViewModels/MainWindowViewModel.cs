@@ -26,6 +26,11 @@ namespace CV19Main.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
 
+        #region Students And Group
+
+        
+
+        
         public ObservableCollection<Group> Groups { get; set; }
 
         private Group _SelectedGroup;
@@ -70,8 +75,7 @@ namespace CV19Main.ViewModels
         private readonly CollectionViewSource _SelectedGroupStudents = new CollectionViewSource();
         public ICollectionView SelectedGroupStudents => _SelectedGroupStudents?.View;
 
-
-
+        #endregion
 
         #region StudentFilterText
 
@@ -119,6 +123,20 @@ namespace CV19Main.ViewModels
 
         #endregion
 
+
+        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+        #region SelectedDirectiory
+
+        private DirectoryViewModel _SelectedDirectiory;
+
+        public DirectoryViewModel SelectedDirectiory
+        {
+            get => _SelectedDirectiory;
+            set => SetField(ref _SelectedDirectiory, value);
+        }
+
+        #endregion
 
         #region Commands
 
@@ -204,6 +222,7 @@ namespace CV19Main.ViewModels
 
         public MainWindowViewModel()
         {
+
             #region Commands
 
             //CloseApplicationCommand =
@@ -217,6 +236,11 @@ namespace CV19Main.ViewModels
                 new LambdaCommand(OnPageIndexChangeCommandExecuted, CanPageIndexChangeCommandExecute);
 
             #endregion
+
+            #region StudentsCreation
+
+            
+
 
             var student_index = 1;
             var students = Enumerable.Range(1, 10).Select(i => new Student()
@@ -239,6 +263,7 @@ namespace CV19Main.ViewModels
 
             // _SelectedGroupStudents.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
             // _SelectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
+            #endregion
         }
 
 
