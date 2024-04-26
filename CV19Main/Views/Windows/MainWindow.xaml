@@ -136,15 +136,21 @@
                         <DockPanel>
                             <DockPanel DockPanel.Dock="Top"  Margin="0,2">
                                 <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="2,0,3,0"/>
-                                <TextBox/>
+                                <TextBox Text="{Binding StudentFilterText, 
+                                    UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
-                            <DataGrid ItemsSource="{Binding SelectedGroup.Students}" AutoGenerateColumns="False"
+                            <DataGrid ItemsSource="{Binding SelectedGroupStudents}" 
+                                      AutoGenerateColumns="False"
                                       VerticalGridLinesBrush="Bisque"
                                       GridLinesVisibility="Vertical"
                                       AlternatingRowBackground="BurlyWood"
                                       CanUserAddRows="False"
                                       EnableRowVirtualization="True">
-                            <DataGrid.Columns>
+                                <!--<DataGrid.GroupStyle>
+                                    <GroupStyle/>
+                                </DataGrid.GroupStyle>-->
+                                <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                                 <DataGridTextColumn Header="Фамилия" Binding="{Binding SureName}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Birthday , StringFormat=dd.MM.yyyy}"/>

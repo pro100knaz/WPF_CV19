@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using CV19Main.Infrastructure.Commands;
 using CV19Main.Models;
@@ -15,6 +18,7 @@ using CV19Main.ViewModels.Base;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Wpf;
+
 
 namespace CV19Main.ViewModels
 {
@@ -25,12 +29,68 @@ namespace CV19Main.ViewModels
         public ObservableCollection<Group> Groups { get; set; }
 
         private Group _SelectedGroup;
-
         public Group SelectedGroup
         {
             get => _SelectedGroup;
-            set => SetField(ref _SelectedGroup, value);
+            set
+            {
+                if (!SetField(ref _SelectedGroup, value)) return;
+                _SelectedGroupStudents.Source = value?.Students;
+                OnPropertyChanged(nameof(SelectedGroupStudents));
+            }
         }
+
+        private void OnStedentFiltered(object sender, FilterEventArgs e)
+        {
+            if (!(e.Item is Student student))
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            var filter_text = _StudentFilterText;
+            if (string.IsNullOrWhiteSpace(filter_text))
+            {
+                return;
+            }
+
+            if (student.Name is null || student.SureName is null)
+            {
+                e.Accepted = false;
+                return;
+            }
+            if(student.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+            if(student.SureName.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+
+            e.Accepted = false;
+
+
+        }
+
+        private readonly CollectionViewSource _SelectedGroupStudents = new CollectionViewSource();
+        public ICollectionView SelectedGroupStudents => _SelectedGroupStudents?.View;
+
+
+
+
+        #region StudentFilterText
+
+        private string _StudentFilterText;
+
+        public string StudentFilterText
+        {
+            get => _StudentFilterText;
+            set
+            {
+                if(!SetField(ref _StudentFilterText, value)) return; 
+
+                _SelectedGroupStudents.View.Refresh();
+
+            }
+        }
+
+        #endregion
+
 
         #region TestDataPoints
 
@@ -174,7 +234,13 @@ namespace CV19Main.ViewModels
             });
 
             Groups = new ObservableCollection<Group>(groups);
+
+            _SelectedGroupStudents.Filter += OnStedentFiltered;
+
+            // _SelectedGroupStudents.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+            // _SelectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
         }
+
 
 
         #region Title Property
