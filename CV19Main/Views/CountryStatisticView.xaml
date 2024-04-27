@@ -26,8 +26,6 @@
                     </StackPanel>
                 </Button>
                 <ListBox ItemsSource="{Binding Countries}">
-
-
                 </ListBox>
             </DockPanel>
 

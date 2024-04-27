@@ -64,7 +64,7 @@ namespace CV19Main.ViewModels
                             .Select(j => new PlaceInfo()
                             {
                                 Name = $"Province {j}",
-                                Location = new Point(i,j),
+                                Location = new PersonalPoint(i,j),
                                 Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount()
                                 {
                                     Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
