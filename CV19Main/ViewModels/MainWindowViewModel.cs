@@ -26,6 +26,24 @@ namespace CV19Main.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
 
+
+
+
+
+        #region SelectedPageIndexProperty
+
+        private int _selectedPageIndex;
+
+        public int SelectedPageIndex
+        {
+            get => _selectedPageIndex;
+            set { SetField(ref _selectedPageIndex, value); }
+        }
+
+        #endregion
+
+        #region Временно не нужный хлам
+
         #region Students And Group
 
         
@@ -111,18 +129,9 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        #region SelectedPageIndexProperty
 
-        private int _selectedPageIndex;
 
-        public int SelectedPageIndex
-        {
-            get => _selectedPageIndex;
-            set { SetField(ref _selectedPageIndex, value); }
-        }
-
-        #endregion
-
+        
 
         public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
 
@@ -135,6 +144,8 @@ namespace CV19Main.ViewModels
             get => _SelectedDirectiory;
             set => SetField(ref _SelectedDirectiory, value);
         }
+
+        #endregion
 
         #endregion
 
