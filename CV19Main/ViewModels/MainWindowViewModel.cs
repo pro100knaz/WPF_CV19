@@ -26,6 +26,7 @@ namespace CV19Main.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
 
+        private readonly CountryStatisticViewModel _CountryStatisticViewModel;
 
 
 
@@ -233,6 +234,8 @@ namespace CV19Main.ViewModels
 
         public MainWindowViewModel()
         {
+
+            _CountryStatisticViewModel = new CountryStatisticViewModel(this);
 
             #region Commands
 
