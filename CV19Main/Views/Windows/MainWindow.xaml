@@ -72,8 +72,7 @@
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
             <TabItem Header="Covid19 Статистика">
-                <view:CountryStatisticView/>
-
+                <view:CountryStatisticView DataContext="{Binding CountryStatistic}"/>
             </TabItem>
                     <TabItem Header="Файловая система"  Visibility="Collapsed" >
                 <Grid>

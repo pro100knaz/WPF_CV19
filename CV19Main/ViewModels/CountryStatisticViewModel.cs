@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,33 @@ namespace CV19Main.ViewModels
 
         #endregion
 
+        #region Отладочный Конструктор
+
+            public CountryStatisticViewModel() : this(null)
+            {
+                if (!App.IsDesignMode)
+                    throw new InvalidOperationException("ИДИИИИИИИИИИИИИИИИИ НАХУЙЙЙЙЙЙЙЙЙ");
+
+                Countries = Enumerable.Range(1, 10)
+                    .Select(i => new CountryInfo()
+                    {
+                        Name = $"Country Number {i}",
+                        ProvinceCounts = Enumerable.Range(1,10)
+                            .Select(j => new PlaceInfo()
+                            {
+                                Name = $"Province {j}",
+                                Location = new Point(i,j),
+                                Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount()
+                                {
+                                    Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
+                                    Count = k
+                                }).ToArray()
+                            }).ToArray()
+                    }).ToArray();
+            }
+        
+
+        #endregion
         public CountryStatisticViewModel(MainWindowViewModel mainWindow)
         {
 

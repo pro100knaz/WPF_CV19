@@ -4,6 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:l="clr-namespace:CV19Main"
+             xmlns:vm="clr-namespace:CV19Main.ViewModels"
+             d:DataContext="{d:DesignInstance vm:CountryStatisticViewModel ,d:IsDesignTimeCreatable=True}"
+
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -14,9 +18,19 @@
         </Grid.ColumnDefinitions>
         <GridSplitter />
         <GroupBox Grid.Column="0" Header="Список стран">
-            <ListBox>
+            <DockPanel>
+                <Button DockPanel.Dock="Top" Style="{x:Null}" Command="{Binding RefreshDataCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:ImageAwesome Icon="Solid_ArrowDown" Width="12"/>
+                        <TextBlock Text="Загрузить Даные"/>
+                    </StackPanel>
+                </Button>
+                <ListBox ItemsSource="{Binding Countries}">
 
-            </ListBox>
+
+                </ListBox>
+            </DockPanel>
+
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Информация">
                 <Grid>
