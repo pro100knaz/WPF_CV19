@@ -19,4 +19,9 @@ internal class CountryInfo : PlaceInfo
         set => _Location = value;
     }
     public IEnumerable<PlaceInfo> ProvinceCounts { get; set; }
+
+    public override string ToString()
+    {
+        return $" {Name}, ({ProvinceCounts.Count()} ; {Location.X} , {Location.Y})";
+    }
 }

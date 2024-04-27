@@ -25,10 +25,7 @@ namespace CV19Main.ViewModels
 
     internal class MainWindowViewModel : ViewModel
     {
-
-        private readonly CountryStatisticViewModel _CountryStatisticViewModel;
-
-
+        public CountryStatisticViewModel CountryStatistic { get; }
 
 
         #region SelectedPageIndexProperty
@@ -235,7 +232,7 @@ namespace CV19Main.ViewModels
         public MainWindowViewModel()
         {
 
-            _CountryStatisticViewModel = new CountryStatisticViewModel(this);
+            CountryStatistic = new CountryStatisticViewModel(this);
 
             #region Commands
 
