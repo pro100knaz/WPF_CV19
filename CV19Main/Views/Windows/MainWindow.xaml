@@ -7,7 +7,7 @@
         xmlns:cmd="clr-namespace:CV19Main.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Main.ViewModels"
         xmlns:decanat="clr-namespace:CV19Main.Models.Decanat"
-
+        xmlns:view ="clr-namespace:CV19Main.Views"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
@@ -71,8 +71,11 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
+            <TabItem Header="Covid19 Статистика">
+                <view:CountryStatisticView/>
 
-            <TabItem Header="Файловая система">
+            </TabItem>
+                    <TabItem Header="Файловая система"  Visibility="Collapsed" >
                 <Grid>
 
                     <Grid.ColumnDefinitions>

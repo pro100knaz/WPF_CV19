@@ -29,7 +29,9 @@ namespace CV19Main.Services
 
         static IEnumerable<string> GetDataLines()
         {
-            using var data_stream = GetDataStream().Result;
+            using var data_stream = (SynchronizationContext.Current is null
+                ? GetDataStream()
+                : Task.Run(GetDataStream)).Result;
 
             using var data_reader = new StreamReader(data_stream);
 
@@ -39,7 +41,10 @@ namespace CV19Main.Services
 
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
-                yield return line.Replace("Korea,", "Korea -").Replace("Bonaire,", "Bonaire").Replace("Helena,", "Helena");
+                yield return line
+                    .Replace("Korea,", "Korea -")
+                    .Replace("Bonaire,", "Bonaire")
+                    .Replace("Helena,", "Helena");
             }
         }
 
@@ -51,7 +56,7 @@ namespace CV19Main.Services
             .ToArray();
 
 
-        static IEnumerable<(String Province, string Country, (int Lat, int Lot) Place, int[] Counts)> GetCountriesData()
+        static IEnumerable<(String Province, string Country, (double Lat, double Lot) Place, int[] Counts)> GetCountriesData()
         {
             var lines = GetDataLines()
                 .Skip(1)
@@ -61,10 +66,15 @@ namespace CV19Main.Services
             {
                 var province = row[0].Trim();
                 var country_name = row[1].Trim(' ', '"');
-                var latitude = int.Parse(row[2]);
-                var longtitude = int.Parse(row[3]);
-                var counts = row.Skip(4).Select(int.Parse).ToArray();
+                double latitude = 0;
+                double longtitude = 0;
+                if (!(string.IsNullOrWhiteSpace(row[2]) || string.IsNullOrWhiteSpace(row[3])))
+                {
+                     latitude = double.Parse(row[2], CultureInfo.InvariantCulture);
+                     longtitude = double.Parse(row[3], CultureInfo.InvariantCulture);
 
+                }
+                var counts = row.Skip(4).Select(int.Parse).ToArray();
 
                 yield return (province, country_name, (latitude, longtitude), counts);
             }
@@ -84,7 +94,7 @@ namespace CV19Main.Services
                     ProvinceCounts = country_info.Select(c => new PlaceInfo()
                     {
                         Name = c.Province,
-                        Location = new Point(c.Place.Lat, c.Place.Lot),
+                        Location = new Point((int)c.Place.Lat, (int)c.Place.Lot),
                         Counts = dates.Zip(c.Counts, (dates, count) => new ConfirmedCount()
                         {
                             Date = dates,
@@ -94,7 +104,6 @@ namespace CV19Main.Services
                 };
 
                 yield return country;
-
 
             }
         }
