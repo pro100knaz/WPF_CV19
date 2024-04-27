@@ -94,7 +94,7 @@ namespace CV19Main.Services
                     ProvinceCounts = country_info.Select(c => new PlaceInfo()
                     {
                         Name = c.Province,
-                        Location = new Point((int)c.Place.Lat, (int)c.Place.Lot),
+                        Location = new PersonalPoint(c.Place.Lat, c.Place.Lot),
                         Counts = dates.Zip(c.Counts, (dates, count) => new ConfirmedCount()
                         {
                             Date = dates,
