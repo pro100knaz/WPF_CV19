@@ -72,10 +72,10 @@ namespace CV19Main.ViewModels
             {
                 Title = "Line Series",
                 MarkerType = MarkerType.Circle,
-                StrokeThickness = 1,
-                MarkerStroke = OxyColors.Red,
-                MarkerStrokeThickness = 1,
-                Color = OxyColors.Blue,
+                StrokeThickness = 3,
+                //MarkerStroke = OxyColors.Red,
+                //MarkerStrokeThickness = 1,
+                Color = OxyColors.Red,
 
             };
             var ttt = SelectedCountryInfo.Counts.ToList();
@@ -92,7 +92,6 @@ namespace CV19Main.ViewModels
             {
                 model.Series.Clear();
             }
-
 
             model.Series.Add(MyLineSeries);
 
