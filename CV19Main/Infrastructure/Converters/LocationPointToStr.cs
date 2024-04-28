@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Markup;
 using CV19Main.Infrastructure.Converters.Base;
 using CV19Main.Models;
 
 namespace CV19Main.Infrastructure.Converters
 {
     [ValueConversion(typeof(PersonalPoint), typeof(string))]
+    [MarkupExtensionReturnType(typeof(LocationPointToStr))]
+
 
     internal class LocationPointToStr : Converter
     {

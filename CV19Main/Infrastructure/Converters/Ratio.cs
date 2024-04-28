@@ -10,6 +10,7 @@ using CV19Main.Infrastructure.Converters.Base;
 
 namespace CV19Main.Infrastructure.Converters
 {
+    [MarkupExtensionReturnType(typeof(Ratio))]
     internal class Ratio : Converter
     {
         [ConstructorArgument("K")]
