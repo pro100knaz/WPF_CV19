@@ -29,8 +29,7 @@ namespace CV19Main.Infrastructure.Commands
             model.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-            
-
+                
                 Title = "X",
             });
 
@@ -41,6 +40,7 @@ namespace CV19Main.Infrastructure.Commands
         public override void Execute(object? parameter)
         {
             ((PlotView)parameter).Model = model;
+
         }
     }
 }

@@ -11,12 +11,12 @@
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:m="clr-namespace:CV19Main.Models"
              xmlns:common="clr-namespace:CV19Main.Infrastructure.Common"
-
-
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:oxyPlot="clr-namespace:OxyPlot;assembly=OxyPlot"
+             xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="230"/>
             <ColumnDefinition />
@@ -30,7 +30,9 @@
                         <TextBlock Text="Загрузить Даные"/>
                     </StackPanel>
                 </Button>
-                <ListBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountryInfo}">
+                <ListBox SelectedIndex="0"
+                    ItemsSource="{Binding Countries}" 
+                         SelectedItem="{Binding SelectedCountryInfo}">
 
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type m:CountryInfo}">
@@ -75,9 +77,15 @@
 
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
 
-                <StackPanel Orientation="Vertical" Grid.Row="0">
+               
+                <oxy:PlotView Model="{Binding model}"/>
+
+                <Grid>
+
+
+                <!--<StackPanel Orientation="Vertical" Grid.Row="0">
                     <Slider Grid.Row="0" Name="ValueSlider1" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}, Converter={c:LinearConverter 3, 5 } }" />
-                    <Slider Grid.Row="0" Name="ValueSlider2" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self }, Converter={c:CompositeConverter First={c:Ratio 3 }, Second={c:Ratio K=12}}}" /> <!--Применение конвертеров через разрешение конвертеров -->
+                    <Slider Grid.Row="0" Name="ValueSlider2" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self }, Converter={c:CompositeConverter First={c:Ratio 3 }, Second={c:Ratio K=12}}}" /> --><!--Применение конвертеров через разрешение конвертеров --><!--
                     <Slider Grid.Row="0" Name="ValueSlider3" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
                     <Slider Grid.Row="0" Name="ValueSlider4" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
                 </StackPanel>
@@ -88,23 +96,23 @@
                     </Border.DataContext>
                     <ListBox Grid.Row="1" ItemsSource="{Binding}">
 
-                        <!--<ListBox.ItemsSource>
+                        --><!--<ListBox.ItemsSource>
                  <MultiBinding Converter="{StaticResource ToArrayConverter}">
                      <Binding ElementName="ValueSlider1" Path="Value"/>
                      <Binding ElementName="ValueSlider2" Path="Value"/>
                      <Binding ElementName="ValueSlider3" Path="Value"/>
                      <Binding ElementName="ValueSlider4" Path="Value"/>
                  </MultiBinding>
-             </ListBox.ItemsSource>-->
+             </ListBox.ItemsSource>--><!--
                     </ListBox>
-                </Border>
+                </Border>-->
 
 
                 <!--<Slider Grid.Row="0" Name="ValueSlider" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
                 <TextBox  VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" 
                     Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource CompositeTestConverter}, UpdateSourceTrigger=PropertyChanged }" TextChanged="TextBox_TextChanged"/>-->
-
             </Grid>
+             </Grid>
         </GroupBox>
     </Grid>
 </UserControl>

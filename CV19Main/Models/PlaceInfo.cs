@@ -13,6 +13,6 @@ namespace CV19Main.Models
 
         public virtual PersonalPoint Location { get; set; }
 
-        public IEnumerable<ConfirmedCount> Counts { get; set; }
+        public virtual IEnumerable<ConfirmedCount> Counts { get; set; }
     }
 }

@@ -227,20 +227,19 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="ГРАФИК" Visibility="Collapsed">
+            <TabItem Header="ГРАФИК">
 
 
                 <DockPanel LastChildFill="True">
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-
                         <Button x:Name="addAxes" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch"  Content="AddAxes" CommandParameter="{Binding ElementName=Plot}">
                             <Button.Command>
-                                <cmd:AddAxesCommand></cmd:AddAxesCommand>
+                                <cmd:AddAxesCommand/>
                             </Button.Command>
                         </Button>
                         <Button x:Name="addLines" HorizontalAlignment="Stretch" Width="40" Height="40" VerticalAlignment="Stretch" Content="AddLines" CommandParameter="{Binding ElementName=Plot}">
                             <Button.Command>
-                                <cmd:AddLinesCommand></cmd:AddLinesCommand>
+                                <cmd:AddLinesCommand/>
                             </Button.Command>
                         </Button>
                     </StackPanel>
