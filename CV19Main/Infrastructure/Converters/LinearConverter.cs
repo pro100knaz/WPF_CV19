@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Markup;
 using CV19Main.Infrastructure.Converters.Base;
 
 namespace CV19Main.Infrastructure.Converters
@@ -6,12 +8,29 @@ namespace CV19Main.Infrastructure.Converters
     /// <summary>
     /// Реализация линейного преобразования f(x) = k*x + b
     /// </summary>
-    class LinearConverter : Converter
+    [ValueConversion(typeof(double), typeof(double))]
+    internal class LinearConverter : Converter
     {
-        public double K { get; set; } = 1;
-        public double B { get; set; } = 0;
-        public LinearConverter() { }
+        [ConstructorArgument("K")]
+        public double K { get; set; }
+        [ConstructorArgument("B")]
 
+        public double B { get; set; }
+
+        public LinearConverter()
+        {
+            
+        }
+
+        public LinearConverter(double K)
+        {
+            this.K = K;
+        }
+
+        public LinearConverter(double K , double B) : this(K)
+        {
+            this.B = B;
+        }
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is null) return null;

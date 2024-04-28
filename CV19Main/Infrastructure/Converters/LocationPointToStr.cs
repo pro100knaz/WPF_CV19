@@ -10,6 +10,8 @@ using CV19Main.Models;
 
 namespace CV19Main.Infrastructure.Converters
 {
+    [ValueConversion(typeof(PersonalPoint), typeof(string))]
+
     internal class LocationPointToStr : Converter
     {
         public override object Convert(object value, Type ty, object p, CultureInfo c)

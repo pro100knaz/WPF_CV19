@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:l="clr-namespace:CV19Main"
              xmlns:vm="clr-namespace:CV19Main.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:c ="clr-namespace:CV19Main.Infrastructure.Converters"
              d:DataContext="{d:DesignInstance vm:CountryStatisticViewModel ,d:IsDesignTimeCreatable=True}"
-
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:m="clr-namespace:CV19Main.Models"
              mc:Ignorable="d" 
@@ -48,8 +48,20 @@
         <GroupBox Grid.Column="1" Header="Информация">
             <Grid>
                 <Grid.Resources>
+                    <sys:Double x:Key="Value3" >3</sys:Double>
+
                     <c:Ratio K="2" x:Key="RatioConverter2"/>
-                    <c:LinearConverter B="5" K="7" x:Key="Linear_k7_b5"/>
+                    <c:LinearConverter x:Key="Linear_k7_b5" K="7" B="{StaticResource Value3}"/>
+
+                    <c:CompositeConverter x:Key="CompositeTestConverter">
+                        <c:CompositeConverter.Second>
+                            <c:LinearConverter K="-3" B="10"/>
+                            
+                        </c:CompositeConverter.Second>
+                        <c:CompositeConverter.First>
+                            <c:LinearConverter K="5"/>
+                        </c:CompositeConverter.First>
+                    </c:CompositeConverter>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -59,7 +71,7 @@
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
                 <Slider Grid.Row="0" Name="ValueSlider" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
                 <TextBox  VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" 
-                    Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource RatioConverter2}, UpdateSourceTrigger=PropertyChanged }"/>
+                    Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource CompositeTestConverter}, UpdateSourceTrigger=PropertyChanged }"/>
             </Grid>
         </GroupBox>
     </Grid>
