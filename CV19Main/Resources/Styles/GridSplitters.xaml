@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <Style x:Key="DefaoultGridSplitterStyle" TargetType="{x:Type GridSplitter}">
-    <Setter Property="Background" Value="Red"/>
+    <Style x:Key="DefoultGridSplitterStyle" TargetType="{x:Type GridSplitter}">
+    <Setter Property="Background" Value="{StaticResource white}"/>
     <Setter Property="Panel.ZIndex" Value="1000"/>
             <Style.Triggers>
 
@@ -15,6 +15,6 @@
 
             </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type GridSplitter}" BasedOn="{StaticResource DefaoultGridSplitterStyle}"/>
+    <Style TargetType="{x:Type GridSplitter}" BasedOn="{StaticResource DefoultGridSplitterStyle}"/>
 
 </ResourceDictionary>
