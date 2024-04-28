@@ -52,10 +52,13 @@ namespace CV19Main.Infrastructure.Commands
 
         public override bool CanExecute(object? parameter)
         {
+            
             if (parameter is PlotView plotView)
             {
-                return plotView.Model != null;
+               
+                    return plotView.Model != null;
             }
+
 
             return false;
 

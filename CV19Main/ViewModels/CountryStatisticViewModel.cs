@@ -34,6 +34,19 @@ namespace CV19Main.ViewModels
 
         #endregion
 
+        #region CountryInfo _selectedCountryInfo;
+
+
+        private CountryInfo _selectedCountryInfo;
+
+            public CountryInfo SelectedCountryInfo
+            {
+                get => _selectedCountryInfo;
+                set => SetField(ref _selectedCountryInfo, value);
+            }
+
+
+        #endregion
 
         #endregion
 

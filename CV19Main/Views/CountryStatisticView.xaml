@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:l="clr-namespace:CV19Main"
              xmlns:vm="clr-namespace:CV19Main.ViewModels"
+             xmlns:c ="clr-namespace:CV19Main.Infrastructure.Converters"
              d:DataContext="{d:DesignInstance vm:CountryStatisticViewModel ,d:IsDesignTimeCreatable=True}"
 
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:m="clr-namespace:CV19Main.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -25,20 +27,40 @@
                         <TextBlock Text="Загрузить Даные"/>
                     </StackPanel>
                 </Button>
-                <ListBox ItemsSource="{Binding Countries}">
+                <ListBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountryInfo}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type m:CountryInfo}">
+                            <DataTemplate.Resources>
+
+                                <c:LocationPointToStr x:Key="LocationConverter"/>
+                            </DataTemplate.Resources>
+                            <TextBlock >
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Location, Converter={StaticResource LocationConverter}, StringFormat=cords:({0})}" Margin="7,0,0,0" />
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </DockPanel>
 
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Информация">
-                <Grid>
-                        <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        </Grid.RowDefinitions>
+            <Grid>
+                <Grid.Resources>
+                    <c:Ratio K="2" x:Key="RatioConverter2"/>
+                    <c:LinearConverter B="5" K="7" x:Key="Linear_k7_b5"/>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                        <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
-                </Grid>
+                <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+                <Slider Grid.Row="0" Name="ValueSlider" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
+                <TextBox  VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" 
+                    Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource RatioConverter2}, UpdateSourceTrigger=PropertyChanged }"/>
+            </Grid>
         </GroupBox>
     </Grid>
 </UserControl>

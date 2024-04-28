@@ -17,5 +17,9 @@ namespace CV19Main.Models
             Y = y;
         }
 
+        public override string ToString()
+        {
+            return $"x - {X}; y - {Y}";
+        }
     }
 }
