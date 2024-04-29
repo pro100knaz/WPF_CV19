@@ -66,7 +66,6 @@ static  IEnumerable<string> GetDataLines()
         if (string.IsNullOrWhiteSpace(line)) continue;
 
         yield return line.Replace("Korea," , "Korea -").Replace( "Bonaire," , "Bonaire").Replace("Helena,","Helena");
-
     }
 }
 

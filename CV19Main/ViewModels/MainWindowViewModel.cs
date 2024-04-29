@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 using CV19Main.Infrastructure.Commands;
 using CV19Main.Models;
 using CV19Main.Models.Decanat;
@@ -22,15 +23,31 @@ using OxyPlot.Wpf;
 
 namespace CV19Main.ViewModels
 {
-
+    [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel : ViewModel
     {
+        public CountryStatisticViewModel CountryStatistic { get; }
+
+
+        #region SelectedPageIndexProperty
+
+        private int _selectedPageIndex;
+
+        public int SelectedPageIndex
+        {
+            get => _selectedPageIndex;
+            set { SetField(ref _selectedPageIndex, value); }
+        }
+
+        #endregion
+
+        #region Временно не нужный хлам
 
         #region Students And Group
 
-        
 
-        
+
+
         public ObservableCollection<Group> Groups { get; set; }
 
         private Group _SelectedGroup;
@@ -64,8 +81,8 @@ namespace CV19Main.ViewModels
                 e.Accepted = false;
                 return;
             }
-            if(student.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
-            if(student.SureName.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+            if (student.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
+            if (student.SureName.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
 
             e.Accepted = false;
 
@@ -86,7 +103,7 @@ namespace CV19Main.ViewModels
             get => _StudentFilterText;
             set
             {
-                if(!SetField(ref _StudentFilterText, value)) return; 
+                if (!SetField(ref _StudentFilterText, value)) return;
 
                 _SelectedGroupStudents.View.Refresh();
 
@@ -111,17 +128,8 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        #region SelectedPageIndexProperty
 
-        private int _selectedPageIndex;
 
-        public int SelectedPageIndex
-        {
-            get => _selectedPageIndex;
-            set { SetField(ref _selectedPageIndex, value); }
-        }
-
-        #endregion
 
 
         public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
@@ -138,6 +146,8 @@ namespace CV19Main.ViewModels
 
         #endregion
 
+        #endregion
+
         #region Commands
 
         #region CloseApplicationCommand
@@ -148,6 +158,8 @@ namespace CV19Main.ViewModels
 
         private void OnCloseApplicationCommandExecuted(object p)
         {
+            //(RootObject as Window)?.Close();
+
             Application.Current.Shutdown();
         }
 
@@ -192,12 +204,12 @@ namespace CV19Main.ViewModels
 
         public ICommand DeleteGroupCpmmand { get; }
 
-        private bool CanDeleteGroupCpmmandExecute (object p) => p is Group group && Groups.Contains(group);
+        private bool CanDeleteGroupCpmmandExecute(object p) => p is Group group && Groups.Contains(group);
 
         public void OnDeleteGroupCpmmandExecuted(object p)
         {
             if (!(p is Group group)) return;
-            
+
             int group_index = Groups.IndexOf(group);
             Groups.Remove(group);
 
@@ -205,7 +217,7 @@ namespace CV19Main.ViewModels
             {
                 SelectedGroup = Groups[group_index];
             }
-            
+
         }
 
         #endregion
@@ -223,6 +235,8 @@ namespace CV19Main.ViewModels
         public MainWindowViewModel()
         {
 
+            CountryStatistic = new CountryStatisticViewModel(this);
+
             #region Commands
 
             //CloseApplicationCommand =
@@ -239,7 +253,7 @@ namespace CV19Main.ViewModels
 
             #region StudentsCreation
 
-            
+
 
 
             var student_index = 1;

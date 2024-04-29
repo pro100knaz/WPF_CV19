@@ -27,7 +27,6 @@ namespace CV19Main
         {
             InitializeComponent();
         }
-
         private void GroupsCollectionFilter(object sender, FilterEventArgs e)
         {
             if(!(e.Item is Group group )) return;
