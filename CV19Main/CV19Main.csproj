@@ -6,7 +6,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	  <StartupObject>CV19Main.Program</StartupObject>
   </PropertyGroup>
+
 
   <ItemGroup>
     <Folder Include="Data\" />
