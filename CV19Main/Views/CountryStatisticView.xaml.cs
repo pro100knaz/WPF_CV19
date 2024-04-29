@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CV19Main.ViewModels;
+using CV19Main.ViewModels.Base;
+using MapControl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +28,23 @@ namespace CV19Main.Views
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
+
+        private void Map_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var map = (MapBase)sender;
+            var pos = e.GetPosition(map);
+            
         }
+
+
+        //private void Map_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    var map = (MapBase)sender;
+        //    var pos = e.GetPosition(map);
+
+
+        //    PushpinLocation = map.ViewToLocation(pos);
+        //}
     }
 }

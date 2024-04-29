@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
-
+using CV19Main.Models;
 namespace CV19Main.Infrastructure.Converters.Base
 {
     abstract class Converter : MarkupExtension, IValueConverter
@@ -17,7 +17,7 @@ namespace CV19Main.Infrastructure.Converters.Base
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotSupportedException("Обратное преобразование не поддерживается");
+            throw new NotSupportedException("Иди нахуй тогово не делаем");
         }
     }
 }
