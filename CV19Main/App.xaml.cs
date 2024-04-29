@@ -12,9 +12,11 @@ namespace CV19Main
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application
-	{
-		
+    {
 
+        public static IHost _Host;
+
+        public static IHost Host => _Host ??= Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
 
 		public static bool IsDesignMode
 		{
@@ -22,11 +24,28 @@ namespace CV19Main
 			private set;
 		} = true;
 
-		protected override void OnStartup(StartupEventArgs e)
+		protected override async void OnStartup(StartupEventArgs e)
 		{
 			IsDesignMode = false;
+            var host = _Host;
 			base.OnStartup(e);
-		}
+
+           await host.StartAsync().ConfigureAwait(false);
+
+        }
+
+        protected override async void OnExit(ExitEventArgs e)
+        {
+
+            base.OnExit(e);
+           var host = _Host;
+
+          await host.StopAsync().ConfigureAwait(false);
+          
+          host.Dispose();
+          _Host = null;
+
+        }
 
         public static void ConfigureServices(HostBuilderContext host,
             IServiceCollection services)
