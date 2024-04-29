@@ -18,21 +18,29 @@ namespace CV19Main
             app.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            var host_builder = Host.CreateDefaultBuilder(args);
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseContentRoot(App.CurrentDirectory)
+                .ConfigureAppConfiguration((host, cfg) => cfg
+                    .SetBasePath(App.CurrentDirectory)
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true))
+                .ConfigureServices(App.ConfigureServices);
 
-            host_builder.UseContentRoot(Environment.CurrentDirectory);
-            host_builder.ConfigureAppConfiguration((host, cfg) =>
-            {
-                cfg.SetBasePath(Environment.CurrentDirectory);
-                cfg.AddJsonFile("appsettings.json", optional: true,
-                    reloadOnChange: true);
-            });
+        //public static IHostBuilder CreateHostBuilder(string[] args)
+        //{
+        //    var host_builder = Host.CreateDefaultBuilder(args);
 
-            host_builder.ConfigureServices(App.ConfigureServices);
+        //    host_builder.UseContentRoot(App.CurrentDirectory);
+        //    host_builder.ConfigureAppConfiguration((host, cfg) =>
+        //    {
+        //        cfg.SetBasePath(App.CurrentDirectory);
+        //        cfg.AddJsonFile("appsettings.json", optional: true,
+        //            reloadOnChange: true);
+        //    });
 
-            return host_builder;
-        }
+        //    host_builder.ConfigureServices(App.ConfigureServices);
+
+        //    return host_builder;
+        //}
     }
 }

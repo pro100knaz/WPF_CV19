@@ -64,8 +64,12 @@ namespace CV19Main.ViewModels
         {
             get
             {
-                var latitude = (int)Math.Round(PushpinLocation.Latitude * 36000);
-                var longitude = (int)Math.Round(Location.NormalizeLongitude(PushpinLocation.Longitude) * 36000);
+                if (SelectedCountryInfo.Location == null)
+                {
+                    return "Choose The Country";
+                }
+                var latitude = (int)Math.Round(SelectedCountryInfo.Location.X * 36000);
+                var longitude = (int)Math.Round(Location.NormalizeLongitude(SelectedCountryInfo.Location.Y) * 36000);
                 var latHemisphere = 'N';
                 var lonHemisphere = 'E';
 
@@ -193,6 +197,7 @@ namespace CV19Main.ViewModels
             {
                 SetField(ref _selectedCountryInfo, value);
                 UpdateLineSeries();
+                OnPropertyChanged(nameof(PushpinText));
             }
         }
         #endregion
