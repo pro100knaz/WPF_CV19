@@ -311,7 +311,7 @@ namespace CV19Main.ViewModels
             CurrentProjection = Projections[0];
             CurrentLayer = Layers.First().Value;
 
-            MapBase b = (MapBase)CurrentProjection;
+            //MapBase b = (MapBase)CurrentProjection;
 
 
             #endregion
