@@ -43,7 +43,7 @@
                             </DataTemplate.Resources>
                             <TextBlock >
                                 <TextBlock Text="{Binding Name}"/>
-                                <TextBlock Text="{Binding Location, Converter={StaticResource LocationConverter}, StringFormat=cords:({0})}" Margin="7,0,0,0" />
+                                <!--<TextBlock Text="{Binding Location, Converter={StaticResource LocationConverter}, StringFormat=cords:({0})}" Margin="7,0,0,0" />-->
                             </TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -103,7 +103,7 @@
                         </Binding>
                     </map:MapBase.MapProjection>
 
-                    <map:Pushpin map:MapPanel.Location="{Binding PushpinLocation}"
+                    <map:Pushpin map:MapPanel.Location="{Binding SelectedCountryInfo.Location ,Converter= {StaticResource LocationConverter}}"
                                   Content="{Binding PushpinText}"/>
                 </map:Map>
 

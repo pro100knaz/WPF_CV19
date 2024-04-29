@@ -11,6 +11,7 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
 
         mc:Ignorable="d"
         Title="{Binding Path= Title}" 
@@ -74,6 +75,13 @@
             <TabItem Header="Covid19 Статистика">
                 <view:CountryStatisticView DataContext="{Binding CountryStatistic}"/>
             </TabItem>
+
+            <TabItem>
+                <TextBlock Text="{x:Static  system:Environment.CurrentDirectory}">
+
+                </TextBlock>
+            </TabItem>
+
                     <TabItem Header="Файловая система"  Visibility="Collapsed" >
                 <Grid>
 
@@ -227,7 +235,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="ГРАФИК">
+            <TabItem Header="ГРАФИК" Visibility="Collapsed">
 
 
                 <DockPanel LastChildFill="True">
