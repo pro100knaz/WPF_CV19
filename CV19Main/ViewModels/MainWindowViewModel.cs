@@ -15,6 +15,7 @@ using System.Windows.Markup;
 using CV19Main.Infrastructure.Commands;
 using CV19Main.Models;
 using CV19Main.Models.Decanat;
+using CV19Main.Services.Interfaces;
 using CV19Main.ViewModels.Base;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -26,6 +27,7 @@ namespace CV19Main.ViewModels
     [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel : ViewModel
     {
+        private readonly IAsyncDataService _asyncData;
         public CountryStatisticViewModel CountryStatistic { get; }
 
 
@@ -232,9 +234,10 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        public MainWindowViewModel(CountryStatisticViewModel statistic)
+        public MainWindowViewModel(CountryStatisticViewModel statistic, IAsyncDataService asyncData)
         {
-
+            _asyncData = asyncData;
+            
             CountryStatistic = statistic;
 
             statistic.MainModel = this;
