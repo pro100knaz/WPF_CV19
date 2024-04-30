@@ -33,6 +33,23 @@ namespace CV19Main.ViewModels
         private double _FuelAmount;
         public double FuelAmount { get => _FuelAmount; set => SetField(ref _FuelAmount, value); }
 
+        #region double Coefficient - "Коэффициент Преобразования"
+
+        ///<summary> Коэффициент Преобразования </summary>
+        private double _Coefficient = 1;
+
+        ///<summary> Коэффициент Преобразования </summary>
+        public double Coefficient
+        {
+            get => _Coefficient;
+            set => SetField(ref _Coefficient, value);
+        }
+
+        #endregion
+
+
+
+
         #endregion
 
         public CountryStatisticViewModel CountryStatistic { get; }
