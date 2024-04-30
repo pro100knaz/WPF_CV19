@@ -232,11 +232,12 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountryStatisticViewModel statistic)
         {
 
-            CountryStatistic = new CountryStatisticViewModel(this);
+            CountryStatistic = statistic;
 
+            statistic.MainModel = this;
             #region Commands
 
             //CloseApplicationCommand =

@@ -19,7 +19,7 @@ using CV19Main.ViewModels;
 namespace CV19Main
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainModel.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
