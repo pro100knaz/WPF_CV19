@@ -260,6 +260,11 @@ namespace CV19Main.ViewModels
 
         private void OnStartProcessCommandExecuted(object p)
         {
+           new Thread(ProcessProceed).Start();
+        }
+
+        private void ProcessProceed()
+        {
             DataValue = _asyncData.GetResult(DateTime.Now);
         }
 
