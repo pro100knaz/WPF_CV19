@@ -50,6 +50,7 @@ namespace CV19Main
         {
             services.AddSingleton<DataService>();
 			services.AddSingleton<CountryStatisticViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
         }
 
 

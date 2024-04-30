@@ -12,7 +12,7 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
-
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         mc:Ignorable="d"
         Title="{Binding Path= Title}" 
         Height="450" Width="800">
@@ -28,9 +28,6 @@
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
     </Window.Resources>
 
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">

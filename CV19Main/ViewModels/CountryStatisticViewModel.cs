@@ -22,7 +22,7 @@ namespace CV19Main.ViewModels
     {
         private DataService _dataService;
 
-        private MainWindowViewModel MainWindow { get; }
+        public MainWindowViewModel MainModel { get; internal set; }
 
 
         #region Properties
@@ -225,33 +225,35 @@ namespace CV19Main.ViewModels
 
         #region Отладочный Конструктор
 
-        public CountryStatisticViewModel() : this(null)
-        {
-            if (!App.IsDesignMode)
-                throw new InvalidOperationException("ИДИИИИИИИИИИИИИИИИИ НАХУЙЙЙЙЙЙЙЙЙ");
+        //public CountryStatisticViewModel() : this(null)
+        //{
+        //    if (!App.IsDesignMode)
+        //        throw new InvalidOperationException("ИДИИИИИИИИИИИИИИИИИ НАХУЙЙЙЙЙЙЙЙЙ");
 
-            Countries = Enumerable.Range(1, 10)
-                .Select(i => new CountryInfo()
-                {
-                    Name = $"Country Number {i}",
-                    Provinces = Enumerable.Range(1, 10)
-                        .Select(j => new PlaceInfo()
-                        {
-                            Name = $"Province {j}",
-                            Location = new PersonalPoint(i, j),
-                            Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount()
-                            {
-                                Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
-                                Count = k
-                            }).ToArray()
-                        }).ToArray()
-                }).ToArray();
-        }
+        //    Countries = Enumerable.Range(1, 10)
+        //        .Select(i => new CountryInfo()
+        //        {
+        //            Name = $"Country Number {i}",
+        //            Provinces = Enumerable.Range(1, 10)
+        //                .Select(j => new PlaceInfo()
+        //                {
+        //                    Name = $"Province {j}",
+        //                    Location = new PersonalPoint(i, j),
+        //                    Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount()
+        //                    {
+        //                        Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
+        //                        Count = k
+        //                    }).ToArray()
+        //                }).ToArray()
+        //        }).ToArray();
+        //}
 
 
         #endregion
-        public CountryStatisticViewModel(MainWindowViewModel mainWindow)
+        public CountryStatisticViewModel( DataService dataService)
         {
+
+
 
             model = new PlotModel();
             model.Axes.Add(new DateTimeAxis()
@@ -271,9 +273,8 @@ namespace CV19Main.ViewModels
             );
 
 
-            MainWindow = mainWindow;
 
-            _dataService = new DataService();
+            _dataService = dataService;
 
             #region Commands
 
