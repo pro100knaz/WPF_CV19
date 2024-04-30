@@ -8,11 +8,17 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using CV19Main.Models;
+using CV19Main.Services.Interfaces;
 
 namespace CV19Main.Services
 {
-    internal class DataService
+    internal class DataService : IDataService
     {
+
+        public DataService()
+        {
+            
+        }
 
         const string _DataSouceAddress = @"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 
