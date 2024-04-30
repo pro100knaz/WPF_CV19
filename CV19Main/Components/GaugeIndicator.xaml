@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="CV19Main.Components.GaugeIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CV19Main.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Grid>
+        <!--<Path Stroke="Red" StrokeThickness="3" Data="M 0,0 L 5,10 L 30,60 H 46 V 50 Z" Fill="Blue" Visibility="Collapsed"/>
+
+        <Polygon Stroke="Red" StrokeThickness="2" Fill="Blue"
+                 Points="0,0 5,7 4,8 10,2" Visibility="Collapsed"/>
+
+        <Polyline Stroke="Red" StrokeThickness="2" Points="0,0 5,7 10,8 10,2" Visibility="Collapsed"/> 
+
+        <Line Stroke="Red" StrokeThickness="2"
+              X1="{Binding ActualWidth,RelativeSource={RelativeSource Self}}"
+           
+              Y1="{Binding  ActualHeight,RelativeSource={RelativeSource Self}}" Visibility="Collapsed"/>
+<Border BorderBrush="Red" BorderThickness="0,0,4,1" Visibility="Collapsed"/>-->
+
+
+        <Viewbox>
+            <Grid Width="100" Height="100">
+                <Line StrokeThickness="2" Stroke="Red" 
+                      X1 ="50" X2="50"
+                      Y1="80" Y2="20" RenderTransformOrigin="0.5,0.8">
+                    <Line.RenderTransform >
+                        <TransformGroup>
+                            <RotateTransform Angle="-50"/>
+                            <RotateTransform Angle="100"/>
+                        </TransformGroup>
+                    </Line.RenderTransform>
+                </Line>
+            </Grid>
+        </Viewbox>
+
+    </Grid>
+</UserControl>
