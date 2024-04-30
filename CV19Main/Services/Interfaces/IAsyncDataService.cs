@@ -8,5 +8,6 @@ namespace CV19Main.Services.Interfaces
 {
     internal interface IAsyncDataService
     {
+        string GetResult(DateTime Time);
     }
 }

@@ -30,6 +30,7 @@ namespace CV19Main.ViewModels
         private readonly IAsyncDataService _asyncData;
         public CountryStatisticViewModel CountryStatistic { get; }
 
+        public PlotModel model;
 
         #region SelectedPageIndexProperty
 
@@ -150,6 +151,21 @@ namespace CV19Main.ViewModels
 
         #endregion
 
+
+        #region string DataValue - "Результат длитльной асинхронной операции"
+
+        ///<summary> Результат длитльной асинхронной операции </summary>
+        private string _DataValue;
+
+        ///<summary> Результат длитльной асинхронной операции </summary>
+        public string DataValue
+        {
+            get => _DataValue;
+            set => SetField(ref _DataValue, value);
+        }
+
+        #endregion
+
         #region Commands
 
         #region CloseApplicationCommand
@@ -230,7 +246,44 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        public PlotModel model;
+        #region Command StartProcessCommand - Команда которая запускает процесс
+
+        ///<summary> Команда которая запускает процесс </summary>
+
+        public ICommand StartProcessCommand { get; }
+
+        ///<summary>Проверка возможности выполнения - Команда которая запускает процесс </summary>
+
+        private static bool CanStartProcessCommandExecute(object p) => true;
+
+        ///<summary>Логика выполнения - Команда которая запускает процесс </summary>
+
+        private void OnStartProcessCommandExecuted(object p)
+        {
+            DataValue = _asyncData.GetResult(DateTime.Now);
+        }
+
+        #endregion
+
+        #region Command StopProcessCommand - Останавливает Процесс
+
+        ///<summary> Останавливает Процесс </summary>
+
+        public ICommand StopProcessCommand { get; }
+
+        ///<summary>Проверка возможности выполнения - Останавливает Процесс </summary>
+
+        private static bool CanStopProcessCommandExecute(object p) => true;
+
+        ///<summary>Логика выполнения - Останавливает Процесс </summary>
+
+        private void OnStopProcessCommandExecuted(object p)
+        {
+
+        }
+
+        #endregion
+
 
         #endregion
 
@@ -252,6 +305,8 @@ namespace CV19Main.ViewModels
 
             PageIndexChangeCommand =
                 new LambdaCommand(OnPageIndexChangeCommandExecuted, CanPageIndexChangeCommandExecute);
+
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecute);
 
             #endregion
 

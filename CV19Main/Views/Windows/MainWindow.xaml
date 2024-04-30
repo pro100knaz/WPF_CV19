@@ -69,6 +69,26 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}">
+            <TabItem Header="Testing">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                        <UniformGrid
+                                     HorizontalAlignment="Left"
+                                     Rows="1">
+                            <Button Margin="5" Padding="20, 5" Content="Запуск" Command="{Binding StartProcessCommand}"/>
+                            <Button Margin="5" Padding="20,5" Content="Остановка"/>
+                        </UniformGrid>
+                        <ProgressBar DockPanel.Dock="Top" Height="20" Margin="10"/>
+                    </DockPanel>
+
+                    <Grid>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+
+                                   Text="{Binding DataValue}" FontSize="60"/>
+                    </Grid>
+
+                </DockPanel>
+            </TabItem>
             <TabItem Header="Covid19 Статистика">
                 <view:CountryStatisticView DataContext="{Binding CountryStatistic}"/>
             </TabItem>
@@ -290,7 +310,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Вкладка 2" Visibility="Collapsed">
-            <Button Width=" 20" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Button Width=" 20" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
 
                     <Button.Background>
                         <SolidColorBrush Color="White" x:Name="ButtonBrush"/>
@@ -338,7 +358,7 @@
                     </Button.Triggers>
                     </Button>
             </TabItem>
-           
+
         </TabControl>
     </DockPanel>
 </Window>
