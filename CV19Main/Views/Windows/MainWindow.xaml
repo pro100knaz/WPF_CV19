@@ -12,6 +12,7 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:components="clr-namespace:CV19Main.Components"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         mc:Ignorable="d"
         Title="{Binding Path= Title}" 
@@ -289,8 +290,14 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Вкладка 2" Visibility="Collapsed">
-            <Button Width=" 20" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <TabItem Header="Test sss 2">
+
+                <StackPanel>
+                        <components:GaugeIndicator VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="60"
+                                                   Value="{Binding FuelAmount}"/>
+                    <Slider  Value="{Binding FuelAmount}" Maximum="100" Width="60" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                        <Button Width=" 20" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
 
                     <Button.Background>
                         <SolidColorBrush Color="White" x:Name="ButtonBrush"/>
@@ -337,6 +344,11 @@
 
                     </Button.Triggers>
                     </Button>
+
+
+                </StackPanel>
+
+
             </TabItem>
            
         </TabControl>

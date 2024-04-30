@@ -26,6 +26,15 @@ namespace CV19Main.ViewModels
     [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel : ViewModel
     {
+
+
+        #region Tests
+
+        private double _FuelAmount;
+        public double FuelAmount { get => _FuelAmount; set => SetField(ref _FuelAmount, value); }
+
+        #endregion
+
         public CountryStatisticViewModel CountryStatistic { get; }
 
 
@@ -145,6 +154,8 @@ namespace CV19Main.ViewModels
         }
 
         #endregion
+
+
 
         #endregion
 
