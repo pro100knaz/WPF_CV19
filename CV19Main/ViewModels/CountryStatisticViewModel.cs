@@ -10,6 +10,7 @@ using System.Windows.Input;
 using CV19Main.Infrastructure.Commands;
 using CV19Main.Models;
 using CV19Main.Services;
+using CV19Main.Services.Interfaces;
 using CV19Main.ViewModels.Base;
 using MapControl;
 using OxyPlot;
@@ -20,7 +21,7 @@ namespace CV19Main.ViewModels
 {
     internal class CountryStatisticViewModel : ViewModel
     {
-        private DataService _dataService;
+        private readonly IDataService _dataService;
 
         public MainWindowViewModel MainModel { get; internal set; }
 
@@ -250,10 +251,11 @@ namespace CV19Main.ViewModels
 
 
         #endregion
-        public CountryStatisticViewModel( DataService dataService)
+        public CountryStatisticViewModel(IDataService dataService)
         {
 
 
+            #region OxyPlot
 
             model = new PlotModel();
             model.Axes.Add(new DateTimeAxis()
@@ -264,14 +266,15 @@ namespace CV19Main.ViewModels
                 Position = AxisPosition.Bottom
             });
             model.Axes.Add(new LinearAxis()
-            {
-                MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dash,
-                Position = AxisPosition.Left,
-                Title = "Число"
-            }
+                {
+                    MajorGridlineStyle = LineStyle.Solid,
+                    MinorGridlineStyle = LineStyle.Dash,
+                    Position = AxisPosition.Left,
+                    Title = "Число"
+                }
             );
 
+                #endregion
 
 
             _dataService = dataService;

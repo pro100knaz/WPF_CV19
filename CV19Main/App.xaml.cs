@@ -7,6 +7,7 @@ using System.Windows;
 using CV19Main.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CV19Main.Services.Interfaces;
 
 namespace CV19Main
 {
@@ -29,7 +30,6 @@ namespace CV19Main
 			base.OnStartup(e);
 
            await host.StartAsync().ConfigureAwait(false);
-
         }
 
         protected override async void OnExit(ExitEventArgs e)
@@ -42,13 +42,13 @@ namespace CV19Main
           
           host.Dispose();
           _Host = null;
-
         }
 
         public static void ConfigureServices(HostBuilderContext host,
             IServiceCollection services)
         {
-            services.AddSingleton<DataService>();
+            services.AddTransient<IDataService, DataService>();
+          //  services.AddScoped<IDataService, DataService>();
 			services.AddSingleton<CountryStatisticViewModel>();
             services.AddSingleton<MainWindowViewModel>();
         }
