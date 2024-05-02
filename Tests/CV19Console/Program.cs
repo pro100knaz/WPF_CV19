@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Net;
 using System.Linq;
 using System.Threading;
+using CV19Console;
 
 
-
-var test_threads = new Thread[10];
+WebServerTest.Run();
