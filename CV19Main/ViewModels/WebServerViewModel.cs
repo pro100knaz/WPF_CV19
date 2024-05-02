@@ -15,8 +15,12 @@ namespace CV19Main.ViewModels
 
         public bool Enabled
         {
-            get => _Enabled;
-            set => SetField(ref _Enabled, value);
+            get => Server.Enabled;
+            set
+            {
+                Server.Enabled = value;
+                OnPropertyChanged();
+            }
         }
 
         #endregion
@@ -37,7 +41,8 @@ namespace CV19Main.ViewModels
 
         private void OnStartCommandExecuted(object p)
         {
-            Enabled = true;
+            Server.Start();
+            OnPropertyChanged(nameof(Enabled));
         }
 
         #endregion
@@ -61,7 +66,8 @@ namespace CV19Main.ViewModels
 
         private void OnStopCommandExecuted(object p)
         {
-            Enabled = false;
+           Server.Stop();
+           OnPropertyChanged(nameof(Enabled));
         }
 
         #endregion
