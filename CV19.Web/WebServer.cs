@@ -41,24 +41,25 @@ namespace CV19.Web
 
         public void Start()
         {
-            if(_Enabled) return;
+            if (_Enabled) return;
             lock (_SyncRoot)
             {
                 if (_Enabled) return;
-                    _httpListener = new HttpListener();
-                    _httpListener.Prefixes.Add($"http://*:{_Port}/");
-                    _httpListener.Prefixes.Add($"http://+:{_Port}/");
-                    _Enabled = true;
+                _httpListener = null;
+                _httpListener = new HttpListener();
+                _httpListener.Prefixes.Add($"http://*:{_Port}/");
+                _httpListener.Prefixes.Add($"http://+:{_Port}/");
+                _Enabled = true;
             }
             ListenAsync();
         }
 
         public void Stop()
         {
-            if(!_Enabled) return;
+            if (!_Enabled) return;
             lock (_SyncRoot)
             {
-                if(!_Enabled) return;
+                if (!_Enabled) return;
                 _httpListener = null;
                 _Enabled = false;
             }
@@ -66,25 +67,32 @@ namespace CV19.Web
 
         private async void ListenAsync()
         {
+
             var listener = _httpListener; //если кто-то изменит ссылку чтобы мы могли продолжить работу
+
 
 
             listener.Start();
 
+            HttpListenerContext context = null;
+
+
             while (_Enabled)
             {
-                var received_context_task = await listener.GetContextAsync().ConfigureAwait(false);
+                var get_context_task = listener.GetContextAsync();
+                if (context != null) 
+                    ProcessRequestAsync(context);
+                context = await get_context_task.ConfigureAwait(false);
 
-                ProcessRequest(received_context_task);
             }
 
             listener.Stop();
 
         }
 
-        private void ProcessRequest(HttpListenerContext context)
+        private async void ProcessRequestAsync(HttpListenerContext context)
         {
-            RequestReceiver?.Invoke(this, new RequestReceiverEventArgs(context));
+            await Task.Run(() => RequestReceiver?.Invoke(this, new RequestReceiverEventArgs(context)));
         }
 
     }
