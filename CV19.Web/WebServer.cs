@@ -67,7 +67,7 @@ namespace CV19.Web
         private async void ListenAsync()
         {
             var listener = _httpListener; //если кто-то изменит ссылку чтобы мы могли продолжить работу
-            
+
 
             listener.Start();
 
