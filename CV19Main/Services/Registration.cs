@@ -14,7 +14,7 @@ namespace CV19Main.Services
         {
             services.AddSingleton<IDataService, DataService>();
             //  services.AddScoped<IDataService, DataService>();
-
+            services.AddTransient<IWebServiceServer, HttpListenerWebServer>();
             services.AddTransient<IAsyncDataService, AsyncDataService>();
 
             return services;
