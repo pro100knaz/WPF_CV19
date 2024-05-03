@@ -118,6 +118,120 @@
                     </AdornerDecorator>
                 </DockPanel>
             </Grid>
+
+            <Grid x:Name="ResizeElements">
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Line}">
+                        <Setter Property="Stroke" Value="Red"></Setter>
+                        <Setter Property="StrokeThickness" Value="7"></Setter>
+                        <Setter Property="X1" Value="1"></Setter>  
+                        <Setter Property="X2" Value="1"></Setter> 
+                        <Setter Property="Y1" Value="1"></Setter>  
+                        <Setter Property="Y2" Value="1"></Setter>
+                
+                        <Style.Triggers>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Top"/>
+                                    <Condition Property="HorizontalAlignment" Value="Stretch"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="X2" Value="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Setter Property="Cursor" Value="SizeNS"></Setter>
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Bottom"/>
+                                    <Condition Property="HorizontalAlignment" Value="Stretch"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="X2" Value="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Setter Property="Cursor" Value="SizeNS"></Setter>
+                            </MultiTrigger>
+
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Stretch"/>
+                                    <Condition Property="HorizontalAlignment" Value="Left"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Y2" Value="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Setter Property="Cursor" Value="SizeWE"></Setter>
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Stretch"/>
+                                    <Condition Property="HorizontalAlignment" Value="Right"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Y2" Value="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Setter Property="Cursor" Value="SizeWE"></Setter>
+                            </MultiTrigger>
+
+
+
+                        </Style.Triggers>
+                    </Style>
+
+                    <Style TargetType="{x:Type Rectangle}">
+                        <Setter Property="Stroke" Value="DarkRed"></Setter>
+                        <Setter Property="Width" Value="5"></Setter>
+                        <Setter Property="Height" Value="5"></Setter>
+
+                        <Style.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Top"/>
+                                    <Condition Property="HorizontalAlignment" Value="Left"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Cursor" Value="SizeNWSE"/>
+                            </MultiTrigger> 
+                            
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Bottom"/>
+                                    <Condition Property="HorizontalAlignment" Value="Right"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Cursor" Value="SizeNWSE"/>
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Top"/>
+                                    <Condition Property="HorizontalAlignment" Value="Right"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Cursor" Value="SizeNESW"/>
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="VerticalAlignment" Value="Bottom"/>
+                                    <Condition Property="HorizontalAlignment" Value="Left"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Cursor" Value="SizeNESW"/>
+                                <Setter Property="Fill" Value="Blue"/>
+                            </MultiTrigger>
+
+
+                        </Style.Triggers>
+
+
+
+
+                    </Style>
+                </Grid.Resources >
+                <Line VerticalAlignment="Top"/>
+                <Line VerticalAlignment="Bottom"/>
+                <Line HorizontalAlignment="Left"/>
+                <Line HorizontalAlignment="Right"/>
+
+                <Rectangle VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Rectangle VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+               
+
+            </Grid>
         </Grid>
 
     </ControlTemplate>
