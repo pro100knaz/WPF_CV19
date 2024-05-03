@@ -61,6 +61,9 @@
 
                 <DockPanel>
                     <Grid DockPanel.Dock="Top" x:Name="PART_TitleBar" Background="WhiteSmoke">
+                        <i:Interaction.Behaviors>
+                            <b:WindowTitleBarBehavior/>
+                        </i:Interaction.Behaviors>
                         <DockPanel Height="32">
 
                             <Image DockPanel.Dock="Left" x:Name="PART_Icon"
@@ -68,32 +71,33 @@
 
                             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                                 <StackPanel.Resources>
-                                    <Style TargetType="Button" BasedOn="{StaticResource CV19WindowHeaderButtonsStyle}" />
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource CV19WindowHeaderButtonsStyle}" />
                                     <Style TargetType="{x:Type Path}">
                                         <Setter Property="StrokeThickness" Value="2"/>
-                                        <Setter Property="Stroke" Value="{Binding Foreground, 
-                                            RelativeSource= { RelativeSource AncestorType = Button}}"/>
-                                        <Setter Property="Margin" Value="10"></Setter>
+                                        <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
+                                        <Setter Property="Margin" Value="10"/>
                                     </Style>
                                 </StackPanel.Resources>
                                 <Button >
-                                    <Path Data="{StaticResource MinimizeButtonIconGeometry}"></Path>
                                     <i:Interaction.Behaviors>
                                         <b:MinimizeWindow/>
                                     </i:Interaction.Behaviors>
 
+                                    <Path Data="{StaticResource MinimizeButtonIconGeometry}"/>
+
                                 </Button>
                                 <Button >
-                                    <Path Data="{StaticResource MaximizeToMax}"></Path>
                                     <i:Interaction.Behaviors>
                                         <b:WindowStateChanged/>
                                     </i:Interaction.Behaviors>
+                                    <Path Data="{StaticResource MaximizeToMax}"/>
                                 </Button>
                                 <Button Foreground="Red" >
-                                    <Path Data="{StaticResource CloseButtonIconGeometry}"/>
                                     <i:Interaction.Behaviors>
                                        <b:CloseWindowBehavior/>
                                     </i:Interaction.Behaviors>
+
+                                    <Path Data="{StaticResource CloseButtonIconGeometry}"/>
 
                                 </Button>
 
