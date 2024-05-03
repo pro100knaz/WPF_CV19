@@ -23,24 +23,7 @@ namespace CV19Main.Infrastructure.Behaviors
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            var button = AssociatedObject;
-
-           var window = FindWindow(button) as Window;
-
-           window?.Close();
-
-
-        }
-        private static DependencyObject FindWindow(DependencyObject obj)
-        {
-            do
-            {
-                var parent = VisualTreeHelper.GetParent(obj);
-
-                if (parent is null) return obj;
-                obj = parent;
-
-            } while (true);
+           (AssociatedObject.FindVisualRoot() as Window)?.Close();
 
 
         }

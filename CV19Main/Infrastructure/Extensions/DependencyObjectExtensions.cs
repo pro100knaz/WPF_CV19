@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace System.Window
+namespace System.Windows
 {
     static class DependencyObjectExtensions
     {
