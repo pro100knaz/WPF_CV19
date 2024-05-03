@@ -51,6 +51,9 @@
                     Margin="7"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}">
+                <Border.Effect>
+                    <BlurEffect RenderingBias="{TemplateBinding BorderThickness}"></BlurEffect>
+                </Border.Effect>
             </Border>
 
             <Grid x:Name="PART_MainGrid"
@@ -59,6 +62,9 @@
                   TextOptions.TextRenderingMode="ClearType"
                   TextOptions.TextFormattingMode="Display">
 
+                <Grid.Effect>
+                    <DropShadowEffect Opacity="0.5" BlurRadius="7" ShadowDepth="4" Color="BlueViolet"/>
+                </Grid.Effect>
                 <DockPanel>
                     <Grid DockPanel.Dock="Top" x:Name="PART_TitleBar" Background="WhiteSmoke">
                         <i:Interaction.Behaviors>
@@ -66,8 +72,12 @@
                         </i:Interaction.Behaviors>
                         <DockPanel Height="32">
 
-                            <Image DockPanel.Dock="Left" x:Name="PART_Icon"
+
+
+                            <Image DockPanel.Dock="Left" x:Name="PART_Icon" Opacity="0.9" Margin="-7,-7,0,0"
                                    Source="{TemplateBinding Icon}"/>
+
+
 
                             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                                 <StackPanel.Resources>
@@ -122,7 +132,8 @@
             <Grid x:Name="ResizeElements">
                 <Grid.Resources>
                     <Style TargetType="{x:Type Line}">
-                        <Setter Property="Stroke" Value="Red"></Setter>
+                        <Setter Property="Stroke" Value="White"></Setter>
+                        <Setter Property="Opacity" Value="0.01"></Setter>
                         <Setter Property="StrokeThickness" Value="7"></Setter>
                         <Setter Property="X1" Value="1"></Setter>  
                         <Setter Property="X2" Value="1"></Setter> 
@@ -236,7 +247,6 @@
 
     </ControlTemplate>
 
-
     <Style x:Key="CV19WindowStyle" TargetType="{x:Type Window}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="AllowsTransparency" Value="True"/>
@@ -244,7 +254,8 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
-        <Setter Property="Template" Value="{StaticResource CV19WindowTemplate}"/>
+        <Setter Property="BorderBrush" Value="DarkBlue"/>
+            <Setter Property="Template" Value="{StaticResource CV19WindowTemplate}"/>
     </Style>
 
 </ResourceDictionary>

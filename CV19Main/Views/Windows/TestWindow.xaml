@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CV19Main"
         WindowStyle="None"
         Style="{StaticResource CV19WindowStyle}"
-        Icon="../../Resources/windowIcon.png"
+        Icon="../../Resources/coronaIcon.png"
         Title="TestWindow" Height="450" Width="800"
         >
     <Grid>
