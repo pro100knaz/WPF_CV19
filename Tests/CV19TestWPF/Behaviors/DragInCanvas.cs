@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,64 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Microsoft.Xaml.Behaviors;
 
-namespace CV19TestWPF.Behaviours
+namespace CV19TestWPF.Behaviors
 {
     public class DragInCanvas : Behavior<UIElement>
     {
         private Point _StartPoint;
 
         private Canvas canva;
+
+
+        #region readonly PositionX : double - Горизонтальное Смещение
+
+        ///<summary> Горизонтальное Смещение </summary>
+        public static readonly DependencyProperty PositionXProperty =
+            DependencyProperty.Register(
+                nameof(PositionX),
+                typeof(double),
+                typeof(DragInCanvas),
+                new PropertyMetadata(default(double)));
+
+
+
+        ///<summary> Горизонтальное Смещение </summary>
+        //[Category("")]
+        [Description("Горизонтальное Смещение")]
+        public double PositionX
+        {
+            get { return (double)GetValue(PositionXProperty); }
+            set { SetValue(PositionXProperty, value); }
+        }
+
+        #endregion
+
+        #region readonly PositionY : double - Вертикальное положение
+
+        ///<summary> Вертикальное положение </summary>
+        public static readonly DependencyProperty PositionYProperty =
+            DependencyProperty.Register(
+                nameof(PositionY),
+                typeof(double),
+                typeof(DragInCanvas),
+                new PropertyMetadata(default(double)));
+
+
+
+        ///<summary> Вертикальное положение </summary>
+        //[Category("")]
+        [Description("Вертикальное положение")]
+        public double PositionY
+        {
+            get { return (double)GetValue(PositionYProperty); }
+            set { SetValue(PositionYProperty, value); }
+        }
+
+        #endregion
+
+
+
+
         protected override void OnAttached() //Поведение добавляется в коллекцию // и происходит нпример подписка или отписка от собыытий
         { 
             //ТИП ИЗ ПАРАМЕТРА ШАБЛОНА
@@ -59,6 +111,8 @@ namespace CV19TestWPF.Behaviours
 
             obj.SetValue(Canvas.LeftProperty, delta.X);
             obj.SetValue(Canvas.TopProperty, delta.Y);
+
+            PositionX = delta.X; PositionY = delta.Y;
 
         }
     }

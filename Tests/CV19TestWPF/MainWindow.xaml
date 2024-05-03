@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CV19TestWPF"
-        xmlns:b="clr-namespace:CV19TestWPF.Behaviours"
+        xmlns:b="clr-namespace:CV19TestWPF.Behaviors"
         mc:Ignorable="d"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Title="MainWindow" Height="450" Width="800">
@@ -86,8 +86,9 @@
                 VerticalAlignment="Center" 
                 
                 Height="100" Width="210">
+
         </Button>
-       
+
         <Canvas>
             <Ellipse Canvas.Left="30" Canvas.Bottom="20"
                      Stretch="Fill"
@@ -95,9 +96,19 @@
                      Stroke="Red" StrokeThickness="3"
                      Width="20" Height="20">
                 <i:Interaction.Behaviors>
-                    <b:DragInCanvas/>
+                    <b:DragInCanvas x:Name="EllipseDragBehavior"/>
                 </i:Interaction.Behaviors>
             </Ellipse>
+            <Button Canvas.Left="20" Canvas.Top="20" Height="19" Width="85" Content="закрыть приложение">
+                <i:Interaction.Behaviors>
+                    <b:CloseWindowBehavior/>
+                </i:Interaction.Behaviors>
+            </Button>
+
+            <TextBlock Canvas.Left="23" Canvas.Top="42" 
+                       Text="{Binding PositionX, ElementName= EllipseDragBehavior}"/>
+            <TextBlock Canvas.Left="23" Canvas.Top="60" 
+                       Text="{Binding PositionY, ElementName= EllipseDragBehavior}"/>
         </Canvas>
 
     </Grid>
