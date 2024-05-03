@@ -31,6 +31,17 @@
         </Setter>
     </Style>
 
+    <Geometry x:Key="MinimizeButtonIconGeometry">M 0,8 H8 M 0,7 H8 M 0,6 H8</Geometry>
+
+    <Geometry x:Key="MaximizeToMax">
+        M0,0 L0,8 8,8 8,0 Z M2,2 L6,2 6,6 2,6 Z
+    </Geometry>
+
+    <Geometry x:Key="CloseButtonIconGeometry">
+        M0,0 L8,8 M0,8 L8,0
+    </Geometry>
+
+
     <ControlTemplate x:Key="CV19WindowTemplate"  TargetType="{x:Type Window}">
         <Grid>
             <Border x:Name="PART_Border"
@@ -44,21 +55,34 @@
                   Background="{TemplateBinding Background}"
                   TextOptions.TextRenderingMode="ClearType"
                   TextOptions.TextFormattingMode="Display">
-                
+
                 <DockPanel>
                     <Grid DockPanel.Dock="Top" x:Name="PART_TitleBar" Background="WhiteSmoke">
                         <DockPanel Height="32">
-                            
+
                             <Image DockPanel.Dock="Left" x:Name="PART_Icon"
                                    Source="{TemplateBinding Icon}"/>
-                            
+
                             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                                 <StackPanel.Resources>
                                     <Style TargetType="Button" BasedOn="{StaticResource CV19WindowHeaderButtonsStyle}" />
+                                    <Style TargetType="{x:Type Path}">
+                                        <Setter Property="StrokeThickness" Value="1"/>
+                                        <Setter Property="Stroke" Value="{Binding Foreground, 
+                                            RelativeSource= { RelativeSource AncestorType = Button}}"/>
+                                        <Setter Property="Margin" Value="10"></Setter>
+                                    </Style>
                                 </StackPanel.Resources>
-                                <Button Content="a"> </Button>
-                                <Button Content="b"> </Button>
-                                <Button Content="c"> </Button>
+                                <Button >
+                                    <Path Data="{StaticResource MinimizeButtonIconGeometry}"></Path>
+                                </Button>
+                                <Button >
+                                    <Path Data="{StaticResource MaximizeToMax}"></Path>
+                                </Button>
+                                <Button Foreground="Red" >
+                                    <Path Data="{StaticResource CloseButtonIconGeometry}"></Path>
+                                </Button>
+
                             </StackPanel>
 
                             <TextBlock x:Name="PART_Title"
