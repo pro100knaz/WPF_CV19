@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:CV19Main"
         WindowStyle="None"
         Style="{StaticResource CV19WindowStyle}"
+        Icon="../../Resources/windowIcon.png"
         Title="TestWindow" Height="450" Width="800"
         >
     <Grid>
-        <Button VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="30,40" Padding="20,5" >
+        <Button VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="30,40" Padding="20,5">
             HelloWorld
         </Button>
         <Canvas>
