@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:b="clr-namespace:CV19Main.Infrastructure.Behaviors"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    >
 
     <Style x:Key="CV19WindowHeaderButtonsStyle" TargetType="{x:Type Button}">
         <Setter Property="Focusable" Value="False"/>
@@ -67,7 +70,7 @@
                                 <StackPanel.Resources>
                                     <Style TargetType="Button" BasedOn="{StaticResource CV19WindowHeaderButtonsStyle}" />
                                     <Style TargetType="{x:Type Path}">
-                                        <Setter Property="StrokeThickness" Value="1"/>
+                                        <Setter Property="StrokeThickness" Value="2"/>
                                         <Setter Property="Stroke" Value="{Binding Foreground, 
                                             RelativeSource= { RelativeSource AncestorType = Button}}"/>
                                         <Setter Property="Margin" Value="10"></Setter>
@@ -80,7 +83,11 @@
                                     <Path Data="{StaticResource MaximizeToMax}"></Path>
                                 </Button>
                                 <Button Foreground="Red" >
-                                    <Path Data="{StaticResource CloseButtonIconGeometry}"></Path>
+                                    <Path Data="{StaticResource CloseButtonIconGeometry}"/>
+                                    <i:Interaction.Behaviors>
+                                       <b:CloseWindowBehavior/>
+                                    </i:Interaction.Behaviors>
+
                                 </Button>
 
                             </StackPanel>
@@ -99,10 +106,7 @@
                         </ContentPresenter>
                     </AdornerDecorator>
                 </DockPanel>
-
             </Grid>
-
-
         </Grid>
 
     </ControlTemplate>
