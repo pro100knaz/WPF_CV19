@@ -109,7 +109,6 @@ namespace CV19Main.ViewModels
 
 
 
-
         private PlotModel _model;
         public PlotModel model
         {
@@ -127,6 +126,7 @@ namespace CV19Main.ViewModels
             get => lineSeries;
             set => SetField(ref lineSeries, value);
         }
+
 
         #endregion
 
@@ -150,12 +150,12 @@ namespace CV19Main.ViewModels
 
             MyLineSeries = new LineSeries
             {
-                Title = "Line Series",
+                Title = "Число заболевших",
                 MarkerType = MarkerType.Circle,
-                StrokeThickness = 3,
+                StrokeThickness = 1,
                 //MarkerStroke = OxyColors.Red,
                 //MarkerStrokeThickness = 1,
-                Color = OxyColors.Red,
+                Color = OxyColors.GreenYellow,
 
             };
             var ttt = SelectedCountryInfo.Counts.ToList();
@@ -164,8 +164,6 @@ namespace CV19Main.ViewModels
                 var xx = DateTimeAxis.CreateDataPoint(ttt[i].Date, ttt[i].Count);
                 MyLineSeries.Points.Add(xx);
             }
-
-
 
             var axes = model.Axes;
             if (model.Series.Count != 0)
