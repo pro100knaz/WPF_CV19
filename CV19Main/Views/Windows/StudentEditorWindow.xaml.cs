@@ -14,7 +14,7 @@ namespace CV19Main.Views.Windows
             DependencyProperty.Register(
                 nameof(StudentName),
                 typeof(string),
-                typeof(StudentsManagmentWindow),
+                typeof(StudentEditorWindow),
                 new PropertyMetadata(null));
 
 
@@ -37,7 +37,7 @@ namespace CV19Main.Views.Windows
             DependencyProperty.Register(
                 nameof(SecondName),
                 typeof(string),
-                typeof(StudentsManagmentWindow),
+                typeof(StudentEditorWindow),
                 new PropertyMetadata(default(string)));
 
 
@@ -60,7 +60,7 @@ namespace CV19Main.Views.Windows
             DependencyProperty.Register(
                 nameof(Birthaday),
                 typeof(DateTime),
-                typeof(StudentsManagmentWindow),
+                typeof(StudentEditorWindow),
                 new PropertyMetadata(default(DateTime)));
 
 
@@ -83,7 +83,7 @@ namespace CV19Main.Views.Windows
             DependencyProperty.Register(
                 nameof(Rating),
                 typeof(double),
-                typeof(StudentsManagmentWindow),
+                typeof(StudentEditorWindow),
                 new PropertyMetadata(default(double)));
 
 

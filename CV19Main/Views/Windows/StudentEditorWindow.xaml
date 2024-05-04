@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CV19Main.Views.Windows"
+        xmlns:commands="clr-namespace:CV19Main.Infrastructure.Commands"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource= {RelativeSource Self}}"
-        Title="Редактирование Студента" Height="225" Width="470" ResizeMode="NoResize" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow">
+        Title="Редактирование Студента" Height="255" 
+        Width="470" ResizeMode="NoResize" ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow">
     <DockPanel>
         <TextBlock Text="Редактирование студента" DockPanel.Dock="Top" 
                    VerticalAlignment="Center" 
@@ -15,8 +17,26 @@
                    Margin="0,10,0,0"
                    HorizontalAlignment="Center"/>
         <UniformGrid Rows="1" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="0,0,20,0">
-            <Button Content="Okay" Margin="10,0, 0 ,10" Padding="20,12"/>
-            <Button Content="Cancel" Margin="10,0,0 ,10" Padding="20,12"/>
+            <Button Content="Okay" Margin="10,0, 0 ,10" Padding="20,12"
+                    IsDefault="True">
+                <Button.CommandParameter>
+                    <Binding RelativeSource="{RelativeSource AncestorType=Window}"/>
+                </Button.CommandParameter>
+                <Button.Command>
+                    <commands:CloseDialogWindowCommand DialogResult="True"/> 
+                </Button.Command>
+            </Button>
+            <Button Content="Cancel"
+                    
+                    Margin="10,0,0 ,10" 
+                    Padding="20,12" IsCancel="True">
+                <Button.CommandParameter>
+                    <Binding RelativeSource="{RelativeSource AncestorType=Window}"/>
+                </Button.CommandParameter>
+                <Button.Command>
+                    <commands:CloseDialogWindowCommand DialogResult="False"/>
+                </Button.Command>
+            </Button>
         </UniformGrid>
 
         <Grid Margin="3">
@@ -59,7 +79,7 @@
             <TextBlock Grid.Column="0" Grid.Row="3" Text="Дата Рождения: "/>
 
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SecondName }"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Name}"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding StudentName}"/>
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Rating, StringFormat=0.##}"/>
             <DatePicker Grid.Column="1" Grid.Row="3" Margin="5,6,0,3"  SelectedDate="{Binding Birthaday}"/>
         </Grid>

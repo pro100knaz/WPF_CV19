@@ -41,8 +41,15 @@
 
                 <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0,3">
 
-                    <Button f5:Awesome.Content="Solid_PlusCircle" Foreground="Green" Style="{x:Null}" Padding="0,5" Margin="5,0"/>
-                    <Button f5:Awesome.Content="Solid_UserEdit" Foreground="DarkRed" Style="{x:Null}" Padding="0,5" Margin="5,0"/>
+                    <Button f5:Awesome.Content="Solid_PlusCircle" Foreground="Green" 
+                            Style="{x:Null}" 
+                            Padding="0,5" Margin="5,0"
+                            Command="{Binding CreateNewStudentCommand}"
+                            CommandParameter="{Binding SelectedGroup}"/>
+                    <Button f5:Awesome.Content="Solid_UserEdit" Foreground="DarkRed" 
+                            Style="{x:Null}" Padding="0,5" Margin="5,0"
+                            Command="{Binding EditStudentCommand}"
+                            CommandParameter="{Binding SelectedStudent}"/>
 
                 </UniformGrid>
 
