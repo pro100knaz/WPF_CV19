@@ -10,6 +10,11 @@
 	  <StartupObject>CV19Main.Program</StartupObject>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\coronaIcon.png" />
+    <None Remove="Resources\windowIcon.png" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <Folder Include="Data\" />
@@ -25,6 +30,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CV19.Web\CV19.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\coronaIcon.png" />
+    <Resource Include="Resources\windowIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

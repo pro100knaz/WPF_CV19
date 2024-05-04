@@ -1,0 +1,22 @@
+﻿<Window x:Class="CV19Main.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CV19Main"
+        WindowStyle="None"
+        Style="{StaticResource CV19WindowStyle}"
+        Icon="../../Resources/coronaIcon.png"
+        Title="TestWindow" Height="450" Width="800"
+        >
+    <Grid>
+        <Button VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="30,40" Padding="20,5">
+            HelloWorld
+        </Button>
+        <Canvas>
+            <Ellipse Canvas.Left="20" Canvas.Top="20" StrokeThickness="1" Stroke="Blue" Fill="Red" Height="12" Width="12">
+
+            </Ellipse>
+        </Canvas>
+    </Grid>
+</Window>

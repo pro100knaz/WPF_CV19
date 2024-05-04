@@ -8,7 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-
+                <ResourceDictionary Source="Resources/Styles/CV19WindowStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Base/Brushes.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resources/Styles/GridSplitters.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Dictionary1.xaml"/>
