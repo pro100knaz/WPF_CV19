@@ -13,7 +13,8 @@
         xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        Style="{StaticResource CV19WindowStyle}"
+        Style="{StaticResource  CV19WindowStyle}"
+        
         Title="{Binding Title}"
         Icon="../../Resources/coronaIcon.png"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"

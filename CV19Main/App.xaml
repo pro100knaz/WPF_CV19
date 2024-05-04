@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CV19Main"
              xmlns:vm="clr-namespace:CV19Main.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              StartupUri="/Views/Windows/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,8 +13,9 @@
                 <ResourceDictionary Source="Resources/Base/Brushes.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resources/Styles/GridSplitters.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Dictionary1.xaml"/>
+                <!--<materialDesign:CustomColorTheme BaseTheme="Light" PrimaryColor="Aqua" SecondaryColor="DarkGreen" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
-
             <vm:ViewModelLocator x:Key="Locator"/>
         </ResourceDictionary>
     </Application.Resources>
