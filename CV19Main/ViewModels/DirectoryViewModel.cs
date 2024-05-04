@@ -82,8 +82,6 @@ namespace CV19Main.ViewModels
                _DirectoryInfo = new DirectoryInfo(Path);
         }
 
-
-
     }
     class FileViewModel : ViewModel
     {
