@@ -141,6 +141,35 @@ namespace CV19Main.ViewModels
 
         #endregion
 
+        #region Command TestCommandCommand - Тестовая проверка
+
+
+        ///<summary> Тестовая проверка </summary>
+
+        private ICommand _TestCommandCommand;
+
+        ///<summary> Тестовая проверка </summary>
+
+        public ICommand TestCommandCommand => _TestCommandCommand ??
+                                              new LambdaCommand(OnTestCommandCommandExecuted,
+                                                  CanTestCommandCommandExecute);
+
+        ///<summary>Проверка возможности выполнения - Тестовая проверка </summary>
+
+        private bool CanTestCommandCommandExecute(object p) => true;
+
+        ///<summary>Логика выполнения - Тестовая проверка </summary>
+
+        private void OnTestCommandCommandExecuted(object p)
+        {
+            var value = _userDialog.GetStringValue("Введите строку", " 1231", "Значение по умолчанию");
+
+
+            _userDialog.ShowInformation($"Vvedeno: {value}", "123");
+        }
+
+        #endregion
+
 
         public IEnumerable<Student> Students => _studentsManager.Students;
         public IEnumerable<Group> Groups => _studentsManager.Groups;

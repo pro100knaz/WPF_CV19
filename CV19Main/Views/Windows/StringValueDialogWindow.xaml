@@ -1,0 +1,20 @@
+﻿<Window x:Class="CV19Main.Views.Windows.StringValueDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CV19Main.Views.Windows"
+        mc:Ignorable="d"
+        Title="StringValueDialogWindow" Height="180" Width="320">
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="5">
+            <Button Content="Ok" 
+                    IsDefault="True" 
+                    Margin="5,0" Padding="30,5" 
+                    FontWeight="Bold" Click="OnButtonClick"/>
+            <Button Content="Cancel" IsDefault="True"/>
+        </UniformGrid>
+        <TextBlock Text="Message" Name="MEssageTextBlock" DockPanel.Dock="Top" Margin="5,10"/>
+        <TextBox Name="ValueTextBox"/>
+    </DockPanel>
+</Window>
