@@ -23,7 +23,7 @@
                             <Setter TargetName="PART_Border" Property="Opacity" Value="0.7"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="PART_Border" Property="Background"  Value="Blue"/>
+                            <Setter TargetName="PART_Border" Property="Background"  Value="Tomato"/>
                             <Setter TargetName="PART_Border" Property="Opacity" Value="1"/>
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
@@ -254,7 +254,7 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
-        <Setter Property="BorderBrush" Value="DarkBlue"/>
+        <Setter Property="BorderBrush" Value="Green"/>
             <Setter Property="Template" Value="{StaticResource CV19WindowTemplate}"/>
     </Style>
 

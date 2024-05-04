@@ -19,13 +19,4 @@ namespace CV19Main.Services
             Destination.Rating = source.Rating;
         }
     }
-
-    class GroupRepository : RepositoryInMemory<Group>
-    {
-        protected override void Update(Group source, Group Destination)
-        {
-            Destination.Name = source.Name;
-            Destination.Description = source.Description;
-        }
-    }
 }
