@@ -35,7 +35,7 @@ namespace CV19Main.Services.Students
                         Name = $"Имя {i}",
                         Description = $"Этот студент был создан под номером {Index}",
                         Rating = rnd.Next(1,43) * 100,
-                        SureName = $"Crazy{Index ++}",
+                        SureName = $"Фамилия {Index ++}",
                         Birthday = DateTime.Now.Subtract(TimeSpan.FromDays(300 * rnd.Next(19,34)))
                     });
                 }
