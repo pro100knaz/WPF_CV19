@@ -25,7 +25,6 @@ namespace CV19Main.Infrastructure.Commands
             _Window = window;
 
             window.Closed += OnWindowClosed;
-
             window.ShowDialog();
         }
 

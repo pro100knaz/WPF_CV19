@@ -18,4 +18,6 @@ class GroupRepository : RepositoryInMemory<Group>
         Destination.Name = source.Name;
         Destination.Description = source.Description;
     }
+
+    public Group Get(string groupName) => GetAll().FirstOrDefault(g => g.Name == groupName);
 }

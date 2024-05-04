@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using CV19Main.Infrastructure.Commands;
 using CV19Main.Models.Decanat;
+using CV19Main.Services.Interfaces;
 using CV19Main.Services.Students;
 using CV19Main.ViewModels.Base;
 using CV19Main.Views.Windows;
@@ -16,6 +17,7 @@ namespace CV19Main.ViewModels
     internal class StudentsManagementViewModel : ViewModel
     {
         private readonly StudentsManager _studentsManager;
+        private readonly IUserDialogService _userDialog;
 
 
         #region string Title - "Заголовок Окна"
@@ -82,17 +84,20 @@ namespace CV19Main.ViewModels
         {
             var student = (Student)p;
 
-            var dlg = new StudentEditorWindow()
+            if (_userDialog.Edit(p))
             {
-                StudentName = student.Name,
-                SecondName = student.SureName,
-                Birthaday = student.Birthday,
-                Rating = student.Rating
-            };
-           if(dlg.ShowDialog() == true)
-               MessageBox.Show("Пользователль выполнил редактирование");
-           else
-               MessageBox.Show("Пользователь отказался");
+                _studentsManager.Update((Student)p);
+
+                _userDialog.ShowInformation("Студент отредактирован", "Menedjer studentov");
+
+                // OnPropertyChanged();
+            }
+            else
+            {
+                _userDialog.ShowWarnning("Отказ от редактирования", "Menedjer studentov");
+            }
+
+
         }
 
         #endregion
@@ -107,10 +112,9 @@ namespace CV19Main.ViewModels
 
         ///<summary> Создание нового студента </summary>
 
-        public ICommand CreateNewStudentCommand
-        {
-            get => _CreateNewStudentCommand;
-        }
+        public ICommand CreateNewStudentCommand => _CreateNewStudentCommand ??=
+            new LambdaCommand(OnCreateNewStudentCommandExecuted, CanCreateNewStudentCommandExecute);
+
 
         ///<summary>Проверка возможности выполнения - Создание нового студента </summary>
 
@@ -120,9 +124,19 @@ namespace CV19Main.ViewModels
 
         private void OnCreateNewStudentCommandExecuted(object p)
         {
-            var group = (Group) p;
+            var group = (Group)p;
 
+            var student = new Student();
 
+            if (_userDialog.Edit(student)  && _studentsManager.Create(student, group.Name))
+            {
+                
+               OnPropertyChanged(nameof(Students));
+                return;
+            }
+
+            if (_userDialog.Confirm("Не удалось создать такого студента. Повторить?", "Менеджер Студентов"))
+                OnCreateNewStudentCommandExecuted(p);
         }
 
         #endregion
@@ -132,9 +146,10 @@ namespace CV19Main.ViewModels
         public IEnumerable<Group> Groups => _studentsManager.Groups;
 
 
-        public StudentsManagementViewModel(StudentsManager studentsManager)
+        public StudentsManagementViewModel(StudentsManager studentsManager, IUserDialogService UserDialog)
         {
             _studentsManager = studentsManager;
+            _userDialog = UserDialog;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CV19Main.Services.Students
     static class TestData
     {
         public static Group[] Groups{ get; }  = Enumerable
-            .Range(0, 10)
+            .Range(1, 10)
             .Select(i => new Group {Name = $"Группа номер {i}" })
             .ToArray();
 
@@ -28,7 +28,7 @@ namespace CV19Main.Services.Students
 
             foreach (var group in groups)
             {
-                for (var i = 0; i < 100; i++)
+                for (var i = 0; i <= 10; i++)
                 {
                     group.Students.Add(new Student
                     {
