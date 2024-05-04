@@ -60,6 +60,14 @@
                             <MenuItem Header="Включить" Command="{Binding StartCommand}"/>
                         <MenuItem Header="Выключить" Command="{Binding StopCommand}"/>
                     </MenuItem>
+                    <Separator></Separator>
+                <MenuItem Header="Управление студентами">
+
+                    <MenuItem.Command>
+                        <cmd:ManageStudentsCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
+
             </MenuItem>
             <MenuItem Command="{Binding PageIndexChangeCommand}" CommandParameter="-1">
                 <MenuItem.Header>
