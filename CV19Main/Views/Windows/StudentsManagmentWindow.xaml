@@ -16,6 +16,9 @@
         </Grid.ColumnDefinitions>
         <GroupBox Header="Группа" Grid.Column="0">
             <DockPanel>
+                <Button DockPanel.Dock="Top" Content=" Test Button" Command="{Binding TestCommandCommand}">
+
+                </Button>
                 <ListBox ItemsSource="{Binding Groups}" 
                          SelectedItem="{Binding SelectedGroup}"
                          SelectedIndex="0">

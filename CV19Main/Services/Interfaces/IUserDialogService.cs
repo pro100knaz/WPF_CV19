@@ -18,5 +18,6 @@ namespace CV19Main.Services.Interfaces
 
         bool Confirm(string Message, string Caption, bool Exclamation = false);
 
+        string GetStringValue(string M, string C, string DefaoultValue = null);
     }
 }
