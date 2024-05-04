@@ -47,7 +47,8 @@
                 </UniformGrid>
 
                 <ListBox 
-                    ItemsSource="{Binding SelectedGroup.Students}" >
+                    ItemsSource="{Binding SelectedGroup.Students}" 
+                    SelectedItem="{Binding SelectedStudent}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -70,8 +71,49 @@
             </DockPanel>
 
         </GroupBox>
-        <GroupBox Header="Информация" Grid.Column="2">
+        <GroupBox Header="Информация" Grid.Column="2" DataContext="{Binding SelectedStudent}">
+            <Grid Margin="3">
 
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="Grid.Column" Value="0">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Margin" Value="0,0,2,0"/>
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                            </Trigger>
+
+                            <Trigger Property="Grid.Column" Value="1">
+                               
+                                <Setter Property="Margin" Value="2,0,0,0"/>
+                              
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Фамилия: "/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Имя: "/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Бал: "/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Дата Рождения: "/>  
+
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding SureName}"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Name}"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Rating, StringFormat=0.##}"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Birthday, StringFormat=dd.MM.yyyy}"/>
+            </Grid>
         </GroupBox>
 
         <GridSplitter Grid.Column="0"  Width="3"/>
