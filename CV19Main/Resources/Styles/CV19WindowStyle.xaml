@@ -23,7 +23,7 @@
                             <Setter TargetName="PART_Border" Property="Opacity" Value="0.7"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="PART_Border" Property="Background"  Value="Blue"/>
+                            <Setter TargetName="PART_Border" Property="Background"  Value="Tomato"/>
                             <Setter TargetName="PART_Border" Property="Opacity" Value="1"/>
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
@@ -129,7 +129,11 @@
                 </DockPanel>
             </Grid>
 
-            <Grid x:Name="ResizeElements">
+            <Grid x:Name="PART_ResizeElements">
+
+                <i:Interaction.Behaviors>
+                    <b:ResizeWindowPanel/>
+                </i:Interaction.Behaviors>
                 <Grid.Resources>
                     <Style TargetType="{x:Type Line}">
                         <Setter Property="Stroke" Value="White"></Setter>
@@ -183,7 +187,6 @@
 
                         </Style.Triggers>
                     </Style>
-
                     <Style TargetType="{x:Type Rectangle}">
                         <Setter Property="Stroke" Value="DarkRed"></Setter>
                         <Setter Property="Width" Value="5"></Setter>
@@ -231,6 +234,7 @@
 
                     </Style>
                 </Grid.Resources >
+
                 <Line VerticalAlignment="Top"/>
                 <Line VerticalAlignment="Bottom"/>
                 <Line HorizontalAlignment="Left"/>
@@ -254,7 +258,7 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
-        <Setter Property="BorderBrush" Value="DarkBlue"/>
+        <Setter Property="BorderBrush" Value="Green"/>
             <Setter Property="Template" Value="{StaticResource CV19WindowTemplate}"/>
     </Style>
 
