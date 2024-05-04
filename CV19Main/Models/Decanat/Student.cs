@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CV19Main.Models.Interfaces;
 
 namespace CV19Main.Models.Decanat
 {
-    internal class Student
+    internal class Student : IEntity
     {
         public string Name { get; set; }
         public string SureName { get; set; }
@@ -17,12 +18,5 @@ namespace CV19Main.Models.Decanat
         public double Rating { get; set; }
 
         public string Description { get; set; }
-    }
-
-    internal class Group
-    {
-        public string Description { get; set; }
-        public string Name { get; set; }
-        public ICollection<Student> Students { get; set; }
     }
 }
