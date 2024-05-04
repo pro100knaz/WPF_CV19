@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using CV19Main.Infrastructure.Commands;
 using CV19Main.Models.Decanat;
 using CV19Main.Services.Students;
 using CV19Main.ViewModels.Base;
@@ -54,6 +56,64 @@ namespace CV19Main.ViewModels
         }
 
         #endregion
+
+
+        #region Command EditStudentCommand - Изменение информации о студенте
+
+
+        ///<summary>  Изменение информации о студенте </summary>
+
+        private ICommand _EditStudentCommand;
+
+        ///<summary>  Изменение информации о студенте </summary>
+
+        public ICommand EditStudentCommand => _EditStudentCommand ??=
+            new LambdaCommand(OnEditStudentCommandExecuted, CanEditStudentCommandExecute);
+
+        ///<summary>Проверка возможности выполнения -  Изменение информации о студенте </summary>
+
+        private bool CanEditStudentCommandExecute(object p) => p is Student;
+
+        ///<summary>Логика выполнения -  Изменение информации о студенте </summary>
+
+        private void OnEditStudentCommandExecuted(object p)
+        {
+            var student = (Student)p;
+
+        }
+
+        #endregion
+
+
+        #region Command CreateNewStudentCommand - Создание нового студента
+
+
+        ///<summary> Создание нового студента </summary>
+
+        private ICommand _CreateNewStudentCommand;
+
+        ///<summary> Создание нового студента </summary>
+
+        public ICommand CreateNewStudentCommand
+        {
+            get => _CreateNewStudentCommand;
+        }
+
+        ///<summary>Проверка возможности выполнения - Создание нового студента </summary>
+
+        private bool CanCreateNewStudentCommandExecute(object p) => p is Group;
+
+        ///<summary>Логика выполнения - Создание нового студента </summary>
+
+        private void OnCreateNewStudentCommandExecuted(object p)
+        {
+            var group = (Group) p;
+
+
+        }
+
+        #endregion
+
 
         public IEnumerable<Student> Students => _studentsManager.Students;
         public IEnumerable<Group> Groups => _studentsManager.Groups;
