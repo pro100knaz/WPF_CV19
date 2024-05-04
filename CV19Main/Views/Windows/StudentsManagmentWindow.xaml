@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:CV19Main.Views.Windows"
         xmlns:m="clr-namespace:CV19Main.Models.Decanat"
         DataContext="{Binding StudentsManagementModel, Source= {StaticResource Locator}}"
-        Title="{Binding Title}" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="800"
+        xmlns:f5="http://schemas.fontawesome.com/icons/">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" MinWidth="200"/>
@@ -14,45 +15,60 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <GroupBox Header="Группа" Grid.Column="0">
-            <ListBox ItemsSource="{Binding Groups}" 
-                     SelectedItem="{Binding SelectedGroup}"
-                     SelectedIndex="0">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Group}">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Right" Text="{Binding Students.Count, StringFormat=({0})}"/>
-                            <TextBlock DockPanel.Dock="Left" Text="{Binding Name}"></TextBlock>
-                        </DockPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <DockPanel>
+                <ListBox ItemsSource="{Binding Groups}" 
+                         SelectedItem="{Binding SelectedGroup}"
+                         SelectedIndex="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type m:Group}">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Right" Text="{Binding Students.Count, StringFormat=({0})}"/>
+                                <TextBlock DockPanel.Dock="Left" Text="{Binding Name}"></TextBlock>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
         </GroupBox>
         <GroupBox Header="Студенты" Grid.Column="1">
-            <ListBox ItemsSource="{Binding SelectedGroup.Students}" >
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type m:Student}">
-                        <DockPanel>
-                            <TextBlock>
-                                <TextBlock.ToolTip>
-                                    <TextBlock Text="{Binding Rating}"></TextBlock>
-                                </TextBlock.ToolTip>
-                                <TextBlock DockPanel.Dock="Left" Text="{Binding SureName}"/>
-                                <TextBlock DockPanel.Dock="Left" Text="{Binding Name}"/>
-                            </TextBlock>
-                        </DockPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+
+            <DockPanel>
+
+                <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0,3">
+
+                    <Button f5:Awesome.Content="Solid_PlusCircle" Foreground="Green" Style="{x:Null}" Padding="0,5" Margin="5,0"/>
+                    <Button f5:Awesome.Content="Solid_UserEdit" Foreground="DarkRed" Style="{x:Null}" Padding="0,5" Margin="5,0"/>
+
+                </UniformGrid>
+
+                <ListBox 
+                    ItemsSource="{Binding SelectedGroup.Students}" >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type m:Student}">
+                            <DockPanel>
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Text="{Binding Rating}"></TextBlock>
+                                    </TextBlock.ToolTip>
+                                    <TextBlock DockPanel.Dock="Left" Text="{Binding SureName}"/>
+                                    <TextBlock DockPanel.Dock="Left" Text="{Binding Name}"/>
+                                </TextBlock>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+
         </GroupBox>
         <GroupBox Header="Информация" Grid.Column="2">
 
