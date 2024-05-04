@@ -14,9 +14,9 @@ using System.Windows.Shapes;
 
 namespace CV19Main.Views.Windows
 {
-    public partial class StudentsManagment : Window
+    public partial class StudentsManagmentWindow : Window
     {
-        public StudentsManagment()
+        public StudentsManagmentWindow()
         {
             InitializeComponent();
         }
