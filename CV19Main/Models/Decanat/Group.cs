@@ -6,6 +6,6 @@ internal class Group : IEntity
 {
     public string Description { get; set; }
     public string Name { get; set; }
-    public ICollection<Student> Students { get; set; }
+    public IList<Student> Students { get; set; } = new List<Student>();
     public int Id { get; set; }
 }
