@@ -16,6 +16,8 @@
              xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
              xmlns:map ="clr-namespace:MapControl;assembly=MapControl.WPF"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:CV19Main.Infrastructure.Behaviors"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -92,9 +94,11 @@
                         <map:MapTileLayer TileSource="https://geoportal.wiesbaden.de/cgi-bin/mapserv.fcgi?map=d:/openwimap/umn/map/orthophoto/orthophotos.map"/>
                     </map:Map.MapLayer>
                 </map:Map>-->
-                <map:Map Grid.Row="1" Center="{Binding SelectedCountryInfo.Location ,Converter= {StaticResource LocationConverter}}"
-                    MaxZoomLevel="22" ZoomLevel="7" MapLayer="{Binding CurrentLayer}"
-                    MouseRightButtonUp="Map_MouseRightButtonUp">
+                <map:Map Grid.Row="1" Center="{Binding PushpinLocation}"
+                    MaxZoomLevel="22" ZoomLevel="7" MapLayer="{Binding CurrentLayer}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:MapBehavior/>
+                    </i:Interaction.Behaviors>
                     <map:MapBase.MapProjection>
                         <Binding Path="CurrentProjection">
                             <Binding.FallbackValue>
@@ -103,10 +107,9 @@
                         </Binding>
                     </map:MapBase.MapProjection>
 
-                    <map:Pushpin map:MapPanel.Location="{Binding SelectedCountryInfo.Location ,Converter= {StaticResource LocationConverter}}"
+                    <map:Pushpin map:MapPanel.Location="{Binding PushpinLocation}"
                                   Content="{Binding PushpinText}"/>
                 </map:Map>
-
                 <Grid>
 
 

@@ -14,6 +14,7 @@ namespace CV19Main.Infrastructure.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            return value;
             if(value == null)
                 return new Location(0,0);
 

@@ -60,7 +60,6 @@ namespace CV19Main
 
         private static string GetSourceCodePath([CallerFilePath]string Path = null) => Path;
 
-
     }
 	
 }

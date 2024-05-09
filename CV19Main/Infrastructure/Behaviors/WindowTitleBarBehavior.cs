@@ -18,7 +18,6 @@ namespace CV19Main.Infrastructure.Behaviors
         {
             _Window = AssociatedObject as Window ?? AssociatedObject.FindLogicalParent<Window>();
             AssociatedObject.MouseLeftButtonDown += OnMouseDown;
-
         }
 
 
