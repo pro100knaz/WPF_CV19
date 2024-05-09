@@ -51,13 +51,14 @@ namespace CV19Main.ViewModels
             }
         }
 
-        private Location pushpinLocation = new();
+        private Location pushpinLocation;
         public Location PushpinLocation
         {
             get => pushpinLocation;
             set
             {
                 SetField(ref pushpinLocation, value);
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(PushpinText));
             }
         }
@@ -69,8 +70,8 @@ namespace CV19Main.ViewModels
                 {
                     return "Choose The Country";
                 }
-                var latitude = (int)Math.Round(SelectedCountryInfo.Location.X * 36000);
-                var longitude = (int)Math.Round(Location.NormalizeLongitude(SelectedCountryInfo.Location.Y) * 36000);
+                var latitude = (int)Math.Round(PushpinLocation.Latitude * 36000);
+                var longitude = (int)Math.Round(Location.NormalizeLongitude(PushpinLocation.Longitude) * 36000);
                 var latHemisphere = 'N';
                 var lonHemisphere = 'E';
 
@@ -99,10 +100,6 @@ namespace CV19Main.ViewModels
 
 
         #endregion
-
-
-
-
 
 
         #region OxyPlot
@@ -196,6 +193,7 @@ namespace CV19Main.ViewModels
             {
                 SetField(ref _selectedCountryInfo, value);
                 UpdateLineSeries();
+                PushpinLocation = new Location(value.Location.X, value.Location.Y);
                 OnPropertyChanged(nameof(PushpinText));
             }
         }
@@ -276,6 +274,8 @@ namespace CV19Main.ViewModels
 
 
             _dataService = dataService;
+
+
 
             #region Commands
 

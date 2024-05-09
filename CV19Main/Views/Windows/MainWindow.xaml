@@ -20,11 +20,11 @@
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         mc:Ignorable="d"
         Height="450" Width="800">
-    <!--<i:Interaction.Triggers>
+    <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Path = CountryStatistic.RefreshDataCommand}"/>
         </i:EventTrigger>
-    </i:Interaction.Triggers>-->
+    </i:Interaction.Triggers>
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Q">
             <KeyBinding.Command>
@@ -120,7 +120,6 @@
 
             <TabItem>
                 <TextBlock Text="{x:Static  system:Environment.CurrentDirectory}">
-
                 </TextBlock>
             </TabItem>
 
