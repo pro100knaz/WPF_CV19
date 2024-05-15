@@ -45,7 +45,6 @@
                             </DataTemplate.Resources>
                             <TextBlock >
                                 <TextBlock Text="{Binding Name}"/>
-                                <!--<TextBlock Text="{Binding Location, Converter={StaticResource LocationConverter}, StringFormat=cords:({0})}" Margin="7,0,0,0" />-->
                             </TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -83,17 +82,6 @@
 
 
                 <oxy:PlotView Model="{Binding model}"/>
-
-
-                <!--<map:Map Grid.Row="1" ZoomLevel="10" MaxZoomLevel="21" Center="{Binding SelectedCountryInfo.Location}">
-                    <map:MapScale Margin="4" Opacity="0.5" VerticalAlignment="Bottom" Background="Transparent"/>
-                    
-                    <map:MapGraticule Opacity="0.3" Background="Transparent">
-                    </map:MapGraticule>
-                        <map:Map.MapLayer>
-                        <map:MapTileLayer TileSource="https://geoportal.wiesbaden.de/cgi-bin/mapserv.fcgi?map=d:/openwimap/umn/map/orthophoto/orthophotos.map"/>
-                    </map:Map.MapLayer>
-                </map:Map>-->
                 <map:Map Grid.Row="1" Center="{Binding PushpinLocation}"
                     MaxZoomLevel="22" ZoomLevel="7" MapLayer="{Binding CurrentLayer}">
                     <i:Interaction.Behaviors>
@@ -110,42 +98,6 @@
                     <map:Pushpin map:MapPanel.Location="{Binding PushpinLocation}"
                                   Content="{Binding PushpinText}"/>
                 </map:Map>
-                <Grid>
-
-
-                    <!--<StackPanel Orientation="Vertical" Grid.Row="0">
-                    <Slider Grid.Row="0" Name="ValueSlider1" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}, Converter={c:LinearConverter 3, 5 } }" />
-                    <Slider Grid.Row="0" Name="ValueSlider2" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self }, Converter={c:CompositeConverter First={c:Ratio 3 }, Second={c:Ratio K=12}}}" /> -->
-                    <!--Применение конвертеров через разрешение конвертеров -->
-                    <!--
-                    <Slider Grid.Row="0" Name="ValueSlider3" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
-                    <Slider Grid.Row="0" Name="ValueSlider4" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
-                </StackPanel>
-
-                <Border Grid.Row="1">
-                    <Border.DataContext>
-                        <common:StringToIntArray Str='1;2;3423;4;4325;5;5243'/>
-                    </Border.DataContext>
-                    <ListBox Grid.Row="1" ItemsSource="{Binding}">
-
-                        -->
-                    <!--<ListBox.ItemsSource>
-                 <MultiBinding Converter="{StaticResource ToArrayConverter}">
-                     <Binding ElementName="ValueSlider1" Path="Value"/>
-                     <Binding ElementName="ValueSlider2" Path="Value"/>
-                     <Binding ElementName="ValueSlider3" Path="Value"/>
-                     <Binding ElementName="ValueSlider4" Path="Value"/>
-                 </MultiBinding>
-             </ListBox.ItemsSource>-->
-                    <!--
-                    </ListBox>
-                </Border>-->
-
-
-                    <!--<Slider Grid.Row="0" Name="ValueSlider" Maximum="200" ToolTip="{Binding Value , RelativeSource={RelativeSource Self}}"/>
-                <TextBox  VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" 
-                    Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider, Converter={StaticResource CompositeTestConverter}, UpdateSourceTrigger=PropertyChanged }" TextChanged="TextBox_TextChanged"/>-->
-                </Grid>
             </Grid>
         </GroupBox>
     </Grid>

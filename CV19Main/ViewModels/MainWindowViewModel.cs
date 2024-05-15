@@ -34,36 +34,6 @@ namespace CV19Main.ViewModels
 
         #region Временно не нужный хлам
 
-        #region Students And Group
-
-
-
-
-
-        private readonly CollectionViewSource _SelectedGroupStudents = new CollectionViewSource();
-        public ICollectionView SelectedGroupStudents => _SelectedGroupStudents?.View;
-
-        #endregion
-
-        #region StudentFilterText
-
-        private string _StudentFilterText;
-
-        public string StudentFilterText
-        {
-            get => _StudentFilterText;
-            set
-            {
-                if (!SetField(ref _StudentFilterText, value)) return;
-
-                _SelectedGroupStudents.View.Refresh();
-
-            }
-        }
-
-        #endregion
-
-
         #region TestDataPoints
 
         private IEnumerable<DataPoint> _testDataPoints;
@@ -80,10 +50,6 @@ namespace CV19Main.ViewModels
         #endregion
 
 
-
-
-
-      
 
         #endregion
 
@@ -205,8 +171,6 @@ namespace CV19Main.ViewModels
 
 
         }
-
-
 
         #region Title Property
 

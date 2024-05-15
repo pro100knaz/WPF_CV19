@@ -25,7 +25,6 @@ namespace CV19Main.ViewModels
 
         public MainWindowViewModel MainModel { get; internal set; }
 
-
         #region Properties
 
         #region MapSettings
@@ -201,7 +200,6 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-
         #region Commands
 
         public ICommand RefreshDataCommand { get; }
@@ -247,9 +245,9 @@ namespace CV19Main.ViewModels
 
 
         #endregion
+
         public CountryStatisticViewModel(IDataService dataService)
         {
-
 
             #region OxyPlot
 
@@ -272,10 +270,7 @@ namespace CV19Main.ViewModels
 
                 #endregion
 
-
             _dataService = dataService;
-
-
 
             #region Commands
 
@@ -283,7 +278,6 @@ namespace CV19Main.ViewModels
             RefreshMapLocation = new LambdaCommand(OnRefreshMapLocationExecuted);
 
             #endregion
-
 
             #region MapSettings
 

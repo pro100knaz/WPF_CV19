@@ -16,9 +16,6 @@ namespace CV19Main.Services
             //  services.AddScoped<IDataService, DataService>();
             services.AddTransient<IAsyncDataService, AsyncDataService>();
 
-
-            
-
             return services;
         }
 

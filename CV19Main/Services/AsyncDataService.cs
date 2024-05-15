@@ -12,7 +12,7 @@ namespace CV19Main.Services
         private const int _SleeepTime = 7000;
         public string GetResult(DateTime Time)
         {
-            Thread.Sleep(_SleeepTime);
+           // Thread.Sleep(_SleeepTime);
 
             return $"result value = {Time}";
         }

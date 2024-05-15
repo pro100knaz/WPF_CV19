@@ -1,13 +1,10 @@
 ﻿using CV19Main.Services;
-using System.Configuration;
-using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using CV19Main.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CV19Main.Services.Interfaces;
 
 namespace CV19Main
 {
