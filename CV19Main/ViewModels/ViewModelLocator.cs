@@ -11,7 +11,5 @@ namespace CV19Main.ViewModels
     {
         public MainWindowViewModel MainWindowModel => App.Host.Services.GetRequiredService<MainWindowViewModel>();
 
-        public StudentsManagementViewModel StudentsManagementModel =>
-            App.Host.Services.GetRequiredService<StudentsManagementViewModel>();
     }
 }

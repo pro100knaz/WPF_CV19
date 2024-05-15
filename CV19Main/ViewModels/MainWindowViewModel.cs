@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 using CV19Main.Infrastructure.Commands;
-using CV19Main.Models;
-using CV19Main.Models.Decanat;
 using CV19Main.Services.Interfaces;
 using CV19Main.ViewModels.Base;
 using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Wpf;
 
 
 namespace CV19Main.ViewModels
@@ -29,7 +17,6 @@ namespace CV19Main.ViewModels
     {
         private readonly IAsyncDataService _asyncData;
         public CountryStatisticViewModel CountryStatistic { get; }
-        public WebServerViewModel WebServer { get; }
 
         public PlotModel model;
 
@@ -52,46 +39,6 @@ namespace CV19Main.ViewModels
 
 
 
-        public ObservableCollection<Group> Groups { get; set; }
-
-        private Group _SelectedGroup;
-        public Group SelectedGroup
-        {
-            get => _SelectedGroup;
-            set
-            {
-                if (!SetField(ref _SelectedGroup, value)) return;
-                _SelectedGroupStudents.Source = value?.Students;
-                OnPropertyChanged(nameof(SelectedGroupStudents));
-            }
-        }
-
-        private void OnStedentFiltered(object sender, FilterEventArgs e)
-        {
-            if (!(e.Item is Student student))
-            {
-                e.Accepted = false;
-                return;
-            }
-
-            var filter_text = _StudentFilterText;
-            if (string.IsNullOrWhiteSpace(filter_text))
-            {
-                return;
-            }
-
-            if (student.Name is null || student.SureName is null)
-            {
-                e.Accepted = false;
-                return;
-            }
-            if (student.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
-            if (student.SureName.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return;
-
-            e.Accepted = false;
-
-
-        }
 
         private readonly CollectionViewSource _SelectedGroupStudents = new CollectionViewSource();
         public ICollectionView SelectedGroupStudents => _SelectedGroupStudents?.View;
@@ -136,19 +83,7 @@ namespace CV19Main.ViewModels
 
 
 
-        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
-
-        #region SelectedDirectiory
-
-        private DirectoryViewModel _SelectedDirectiory;
-
-        public DirectoryViewModel SelectedDirectiory
-        {
-            get => _SelectedDirectiory;
-            set => SetField(ref _SelectedDirectiory, value);
-        }
-
-        #endregion
+      
 
         #endregion
 
@@ -198,48 +133,6 @@ namespace CV19Main.ViewModels
         }
 
 
-
-        #region CreateNewGroupCommand
-
-        public ICommand CreateNewGroupCommand { get; }
-
-        private bool CanCreateNewGruopCommandExecute(object p) => true;
-
-        public void OnCreateNewGruopCommandExecuted(object p)
-        {
-            var group_max_index = Groups.Count + 1;
-            var new_group = new Group()
-            {
-                Name = $"GROUP {group_max_index}",
-                Students = new ObservableCollection<Student>()
-            };
-            Groups.Add(new_group);
-        }
-
-        #endregion
-
-
-        #region  DeleteGroupCpmmand Command
-
-        public ICommand DeleteGroupCpmmand { get; }
-
-        private bool CanDeleteGroupCpmmandExecute(object p) => p is Group group && Groups.Contains(group);
-
-        public void OnDeleteGroupCpmmandExecuted(object p)
-        {
-            if (!(p is Group group)) return;
-
-            int group_index = Groups.IndexOf(group);
-            Groups.Remove(group);
-
-            if (group_index < Groups.Count)
-            {
-                SelectedGroup = Groups[group_index];
-            }
-
-        }
-
-        #endregion
 
         #endregion
 
@@ -293,22 +186,15 @@ namespace CV19Main.ViewModels
 
         #endregion
 
-        public MainWindowViewModel(CountryStatisticViewModel statistic, IAsyncDataService asyncData, WebServerViewModel webServer)
+        public MainWindowViewModel(CountryStatisticViewModel statistic, IAsyncDataService asyncData)
         {
             _asyncData = asyncData;
             
             CountryStatistic = statistic;
-            WebServer = webServer;
 
             statistic.MainModel = this;
             #region Commands
 
-            //CloseApplicationCommand =
-            //    new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
-
-            CreateNewGroupCommand = new LambdaCommand(OnCreateNewGruopCommandExecuted, CanCreateNewGruopCommandExecute);
-
-            DeleteGroupCpmmand = new LambdaCommand(OnDeleteGroupCpmmandExecuted, CanDeleteGroupCpmmandExecute);
 
             PageIndexChangeCommand =
                 new LambdaCommand(OnPageIndexChangeCommandExecuted, CanPageIndexChangeCommandExecute);
@@ -317,33 +203,7 @@ namespace CV19Main.ViewModels
 
             #endregion
 
-            #region StudentsCreation
 
-
-
-
-            var student_index = 1;
-            var students = Enumerable.Range(1, 10).Select(i => new Student()
-            {
-                Name = $"Name {student_index}",
-                SureName = $"Surname {student_index++}",
-                Birthday = DateTime.Now,
-                Rating = 0
-            });
-
-            var groups = Enumerable.Range(1, 20).Select(i => new Group
-            {
-                Name = $"Группа {i}",
-                Students = new ObservableCollection<Student>(students)
-            });
-
-            Groups = new ObservableCollection<Group>(groups);
-
-            _SelectedGroupStudents.Filter += OnStedentFiltered;
-
-            // _SelectedGroupStudents.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
-            // _SelectedGroupStudents.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
-            #endregion
         }
 
 

@@ -15,11 +15,6 @@
     <None Remove="Resources\windowIcon.png" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="FontAwesome5" Version="2.1.11" />
     <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
